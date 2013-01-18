@@ -1,4 +1,4 @@
-package net.minecraft.src;
+ï»¿package net.minecraft.src;
 
 import net.minecraft.client.Minecraft;
 
@@ -48,7 +48,7 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 			MMM_Helper.setForgeIcon(ScytheAxeS);
 		}
 		
-		// ƒJƒXƒ^ƒ€ƒpƒPƒbƒg‚Ì’Ç‰Á
+		// ã‚«ã‚¹ã‚¿ãƒ ãƒ‘ã‚±ãƒƒãƒˆã®è¿½åŠ 
 		ModLoader.registerPacketChannel(this, "IHW");
 	}
 
@@ -56,7 +56,7 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 	public void serverCustomPayload(NetServerHandler var1, Packet250CustomPayload var2) {
 		ItemStack litemstack = var1.playerEntity.getCurrentEquippedItem();
 		if (var2.data[0] == 0x00 && litemstack.getItem() instanceof IHW_IItemScytheAxe) {
-			// •ÏŒ`ƒgƒŠƒK[
+			// å¤‰å½¢ãƒˆãƒªã‚¬ãƒ¼
 			if (IHW_ScytheAxe.getCount(litemstack) == 0) {
 				IHW_ScytheAxe.setScythe(litemstack, !IHW_ScytheAxe.isScythe(litemstack));
 				IHW_ScytheAxe.setCount(litemstack, 10);
@@ -72,7 +72,7 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 //		System.out.println("IHW_Client.");
 		ItemStack litemstack = MMM_Helper.mc.thePlayer.getCurrentEquippedItem();
 		if (var2.data[0] == 0x00 && litemstack.getItem() instanceof IHW_IItemScytheAxe) {
-			// •ÏŒ`ƒgƒŠƒK[
+			// å¤‰å½¢ãƒˆãƒªã‚¬ãƒ¼
 			IHW_ScytheAxe.setScythe(litemstack, !IHW_ScytheAxe.isScythe(litemstack));
 			IHW_ScytheAxe.setCount(litemstack, 10);
 		}

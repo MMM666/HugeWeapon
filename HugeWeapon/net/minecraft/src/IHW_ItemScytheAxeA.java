@@ -1,4 +1,4 @@
-package net.minecraft.src;
+ï»¿package net.minecraft.src;
 
 
 import java.util.Iterator;
@@ -34,11 +34,11 @@ public class IHW_ItemScytheAxeA extends ItemAxe implements MMM_IItemRender, IHW_
 	@Override
 	public boolean hitEntity(ItemStack par1ItemStack,
 			EntityLiving par2EntityLiving, EntityLiving par3EntityLiving) {
-		// ƒGƒ“ƒ`ƒƒƒ“ƒg‚É‚æ‚é“Áê“®ì
+		// ã‚¨ãƒ³ãƒãƒ£ãƒ³ãƒˆã«ã‚ˆã‚‹ç‰¹æ®Šå‹•ä½œ
 		if (!par3EntityLiving.worldObj.isRemote) {
 			if (EnchantmentHelper.getSilkTouchModifier(par3EntityLiving)) {
 				
-				// ƒAƒCƒeƒ€ƒXƒeƒB[ƒ‹
+				// ã‚¢ã‚¤ãƒ†ãƒ ã‚¹ãƒ†ã‚£ãƒ¼ãƒ«
 				int li = par2EntityLiving.getRNG().nextInt(5);
 				ItemStack litemstack = par2EntityLiving.getCurrentItemOrArmor(li);
 				par2EntityLiving.setCurrentItemOrArmor(li, null);
@@ -78,7 +78,7 @@ public class IHW_ItemScytheAxeA extends ItemAxe implements MMM_IItemRender, IHW_
 	}
 
 	public boolean renderItem(EntityLiving pEntity, ItemStack pItemstack, int pIndex) {
-		// “Æ©‚ÌƒAƒCƒeƒ€ƒŒƒ“ƒ_ƒ‰
+		// ç‹¬è‡ªã®ã‚¢ã‚¤ãƒ†ãƒ ãƒ¬ãƒ³ãƒ€ãƒ©
 		return IHW_ScytheAxe.renderItem(pEntity, pItemstack, pIndex);
 	}
 

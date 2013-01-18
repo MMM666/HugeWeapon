@@ -1,4 +1,4 @@
-package net.minecraft.src;
+ï»¿package net.minecraft.src;
 
 import net.minecraft.client.Minecraft;
 
@@ -40,7 +40,7 @@ public class IHW_ScytheAxe {
 	}
 
 	public static void setLeftClickCounter(int pvalue) {
-		// ƒNƒŠƒbƒN“®ì••ˆó—p
+		// ã‚¯ãƒªãƒƒã‚¯å‹•ä½œå°å°ç”¨
 		try {
 			// leftClickCounter
 			ModLoader.setPrivateValue(Minecraft.class, MMM_Helper.mc, 28, Integer.valueOf(pvalue));
@@ -58,7 +58,7 @@ public class IHW_ScytheAxe {
 	}
 
 	public static boolean renderItem(EntityLiving pEntity, ItemStack pItemstack, int pIndex) {
-		// “Æ©‚ÌƒAƒCƒeƒ€ƒŒƒ“ƒ_ƒ‰
+		// ç‹¬è‡ªã®ã‚¢ã‚¤ãƒ†ãƒ ãƒ¬ãƒ³ãƒ€ãƒ©
 		fModel.setRotationAngles(0, 0, 0, 0, 0, 0, pItemstack);
 		fModel.renderItem(pItemstack, pEntity, MMM_Helper.mc.gameSettings.thirdPersonView);
 		return true;
@@ -77,7 +77,7 @@ public class IHW_ScytheAxe {
 
 	public static void onUpdate(ItemStack par1ItemStack, World par2World,
 			Entity par3Entity, int par4, boolean par5) {
-		// ‹¤’Ê“®ì
+		// å…±é€šå‹•ä½œ
 		int lc = getCount(par1ItemStack);
 		boolean lf = lc > 0;
 		setCount(par1ItemStack, lf ? --lc : 0);
@@ -85,27 +85,27 @@ public class IHW_ScytheAxe {
 			EntityPlayer lep = (EntityPlayer)par3Entity;
 			if (!par2World.isRemote) {
 				// Server
-				// •ÏŒ`“®ìƒJƒEƒ“ƒ^[
+				// å¤‰å½¢å‹•ä½œã‚«ã‚¦ãƒ³ã‚¿ãƒ¼
 				if (lf) {
 					MMM_Helper.updateCheckinghSlot(lep, par1ItemStack);
 				}
 			} else {
 				// Client
 				if (lep == MMM_Helper.mc.thePlayer) {
-					// •ÏŒ`’†‚ÌUŒ‚“®ì‹Ö~
+					// å¤‰å½¢ä¸­ã®æ”»æ’ƒå‹•ä½œç¦æ­¢
 					if (lc > 0 && !lep.isUsingItem()) {
 						setLeftClickCounter(10);
 						lep.clearItemInUse();
 					}
 					
-					// •ÏŒ`
+					// å¤‰å½¢
 					if (lep.getItemInUse() == par1ItemStack) {
-						// ˆê’èŠÔƒK[ƒh‚Å•ÏŒ`
+						// ä¸€å®šæ™‚é–“ã‚¬ãƒ¼ãƒ‰ã§å¤‰å½¢
 						if (lep.getItemInUseDuration() > 40 && checkMode(par1ItemStack)) {
 							ModLoader.clientSendPacket(new Packet250CustomPayload("IHW", new byte[] {0x00}));
 						}
 /*
-						// ƒK[ƒh’†‚ÉƒNƒŠƒbƒN‚Å•ÏŒ`
+						// ã‚¬ãƒ¼ãƒ‰ä¸­ã«ã‚¯ãƒªãƒƒã‚¯ã§å¤‰å½¢
 						if (MMM_Helper.mc.gameSettings.keyBindAttack.pressed) {
 							ModLoader.clientSendPacket(new Packet250CustomPayload("IHW", new byte[] {0x00}));
 						}
@@ -115,7 +115,7 @@ public class IHW_ScytheAxe {
 			}
 			if (!(lep.isUsingItem() && par5)) {
 //			if (lep.getItemInUse() != par1ItemStack) {
-				// g—pó‘Ô‰ğœ
+				// ä½¿ç”¨çŠ¶æ…‹è§£é™¤
 				if (lc == 0) {
 					if (isScythe(par1ItemStack)) {
 						if (par1ItemStack.getItem() instanceof IHW_ItemScytheAxeA) {

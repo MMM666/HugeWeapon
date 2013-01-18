@@ -1,4 +1,4 @@
-package net.minecraft.src;
+ï»¿package net.minecraft.src;
 
 
 import java.util.Iterator;
@@ -34,7 +34,7 @@ public class IHW_ItemScytheAxeS extends ItemShears implements MMM_IItemRender, I
 	@Override
 	public boolean hitEntity(ItemStack par1ItemStack,
 			EntityLiving par2EntityLiving, EntityLiving par3EntityLiving) {
-		// UŒ‚‚ÌŒ¸‚è‹ï‡
+		// æ”»æ’ƒæ™‚ã®æ¸›ã‚Šå…·åˆ
 		
 		return IHW_ScytheAxe.hitEntity(par1ItemStack, par2EntityLiving, par3EntityLiving);
 	}
@@ -54,50 +54,50 @@ public class IHW_ItemScytheAxeS extends ItemShears implements MMM_IItemRender, I
 		
 		IHW_ScytheAxe.onUpdate(par1ItemStack, par2World, par3Entity, par4, par5);
 		
-		// ”ÍˆÍUŒ‚
+		// ç¯„å›²æ”»æ’ƒ
 		if (par2World.isRemote) {
 			// Client
 			if (par3Entity instanceof EntityPlayer) {
 				EntityPlayer lep = (EntityPlayer)par3Entity;
 				if (lep.getHeldItem() == par1ItemStack) {
-					// ˜r‚ÌU‚èn‚ß‚ğŒŸo‚µ‚Ä”»’èŠJn
+					// è…•ã®æŒ¯ã‚Šå§‹ã‚ã‚’æ¤œå‡ºã—ã¦åˆ¤å®šé–‹å§‹
 					if (lep.isSwingInProgress) {
 						Minecraft lmc = MMM_Helper.mc;
 						if (lep.swingProgressInt == -1) {
-							// UŒ‚”»’è
+							// æ”»æ’ƒåˆ¤å®š
 							Entity lentity = null;
 							if (lmc.thePlayer == lep) {
-								// ƒ^[ƒQƒbƒg‚ÍœŠO
+								// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¯é™¤å¤–
 								if (lmc != null && lmc.objectMouseOver != null) {
 									lentity = lmc.objectMouseOver.entityHit;
 								}
 							} else if (lep.getClass().getSimpleName().equals("LMM_EntityLittleMaidAvatar")) {
-								// LMM—p“ÁêœŠOˆ—
+								// LMMç”¨ç‰¹æ®Šé™¤å¤–å‡¦ç†
 								try {
 									lentity = (Entity)lep.getClass().getField("avatar").get(lep);
 								} catch (Exception e) {
 								}
 							}
-							// ©g‚ÌüˆÍ‚ÌMOB‚ğŠl“¾
+							// è‡ªèº«ã®å‘¨å›²ã®MOBã‚’ç²å¾—
 							List llist = par2World.getEntitiesWithinAABB(EntityLiving.class, par3Entity.boundingBox.expand(5D, 0D, 5D));
 							for (int lj = 0; lj < llist.size(); lj++) {
-								// ©•ª‚Æ’Êí‚Ìˆ—‘ÎÛ‚ÍœŠO
+								// è‡ªåˆ†ã¨é€šå¸¸ã®å‡¦ç†å¯¾è±¡ã¯é™¤å¤–
 								EntityLiving lel = (EntityLiving)llist.get(lj);
 								if (lel == lentity || lel == lep) continue;
-								// Ë’ö‹——£‚Ì”»’èAMOB‚Ì‘å‚«‚³‚ğl—¶
+								// å°„ç¨‹è·é›¢ã®åˆ¤å®šã€MOBã®å¤§ãã•ã‚’è€ƒæ…®
 								double lln = 3.0D + (double)lel.width;
 								lln *= lln;
 								if (lep.getDistanceSqToEntity(lel) <= lln) {
-									// ”ÍˆÍUŒ‚‚Ì‘ÎÛ
+									// ç¯„å›²æ”»æ’ƒã®å¯¾è±¡
 									double lvx = lel.posX - lep.posX;
 									double lvz = lep.posZ - lel.posZ;
 									float lyaw = (float)Math.toDegrees(Math.atan2(lvx, lvz));
 									float lf = lep.rotationYaw - lyaw;
 									for (;lf > 360F; lf -= 360);
 									for (;lf < 0F; lf += 360);
-									// ¶230dig - ³–Ê180deg - ‰E100dig
+									// å·¦230dig - æ­£é¢180deg - å³100dig
 									if (lf > 100F && lf < 230F) {
-										// UŒ‚”»’è
+										// æ”»æ’ƒåˆ¤å®š
 //										System.out.println(String.format("%s, %d : %d : %f/%f : %f/%f", lel.getClass().getSimpleName(), lep.swingProgressInt, lep.attackTime, lep.getDistanceSqToEntity(lel), lln, lep.rotationYawHead, lf));
 										ModLoader.clientSendPacket(new Packet7UseEntity(lep.entityId, lel.entityId, 1));
 										lep.attackTargetEntityWithCurrentItem(lel);
@@ -105,7 +105,7 @@ public class IHW_ItemScytheAxeS extends ItemShears implements MMM_IItemRender, I
 								}
 							}
 							
-							// ƒN[ƒ‹ƒ^ƒCƒ€
+							// ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ 
 							lep.attackTime = 20;
 						}
 					}
@@ -129,7 +129,7 @@ public class IHW_ItemScytheAxeS extends ItemShears implements MMM_IItemRender, I
 	}
 
 	public boolean renderItem(EntityLiving pEntity, ItemStack pItemstack, int pIndex) {
-		// “Æ©‚ÌƒAƒCƒeƒ€ƒŒƒ“ƒ_ƒ‰
+		// ç‹¬è‡ªã®ã‚¢ã‚¤ãƒ†ãƒ ãƒ¬ãƒ³ãƒ€ãƒ©
 		return IHW_ScytheAxe.renderItem(pEntity, pItemstack, pIndex);
 	}
 
