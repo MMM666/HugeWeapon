@@ -1,4 +1,4 @@
-ï»¿package net.minecraft.src;
+package net.minecraft.src;
 
 import net.minecraft.client.Minecraft;
 
@@ -68,10 +68,10 @@ public class IHW_ModelScytheAxe extends ModelBase {
 
 	public void setRotationAngles(float par1, float par2, float par3,
 			float par4, float par5, float par6, ItemStack pitem) {
-		// å½¢çŠ¶
+		// Œ`ó
 		int lc = IHW_ScytheAxe.getCount(pitem);
 		if (lc > 0) {
-			// å¤‰å½¢
+			// •ÏŒ`
 			if (IHW_ScytheAxe.isScythe(pitem)) {
 				float lf1 = 0.0F;
 				float lf2 = 1.0F;
@@ -98,7 +98,7 @@ public class IHW_ModelScytheAxe extends ModelBase {
 				fBase.rotationPointY = 8F * lf;
 			}
 		} else {
-			// æ•°å€¤å›ºå®šè¡¨ç¤º
+			// ”’lŒÅ’è•\¦
 			if (IHW_ScytheAxe.isScythe(pitem)) {
 				fBladeF20.rotateAngleX = -3F;
 				fBladeF21.setRotationPoint(0.0F, -3.8F, -1.0F);
