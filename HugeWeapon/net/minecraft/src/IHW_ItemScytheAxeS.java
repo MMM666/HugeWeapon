@@ -55,66 +55,95 @@ public class IHW_ItemScytheAxeS extends ItemShears implements MMM_IItemRender, I
 		IHW_ScytheAxe.onUpdate(par1ItemStack, par2World, par3Entity, par4, par5);
 		
 		// 範囲攻撃
-		if (par2World.isRemote) {
-			// Client
-			if (par3Entity instanceof EntityPlayer) {
-				EntityPlayer lep = (EntityPlayer)par3Entity;
+		EntityPlayer lep = null;
+		Entity lentity = null;
+		boolean fcanattack = false;
+		if (par3Entity instanceof EntityPlayer) {
+			if (par2World.isRemote) {
+				// Client
+				lep = (EntityPlayer)par3Entity;
+				// ターゲットは除外
+				Minecraft lmc = MMM_Helper.mc;
+				if (lmc != null && lmc.objectMouseOver != null) {
+					lentity = lmc.objectMouseOver.entityHit;
+				}
 				if (lep.getHeldItem() == par1ItemStack) {
 					// 腕の振り始めを検出して判定開始
 					if (lep.isSwingInProgress) {
-						Minecraft lmc = MMM_Helper.mc;
 						if (lep.swingProgressInt == -1) {
-							// 攻撃判定
-							Entity lentity = null;
-							if (lmc.thePlayer == lep) {
-								// ターゲットは除外
-								if (lmc != null && lmc.objectMouseOver != null) {
-									lentity = lmc.objectMouseOver.entityHit;
-								}
-							} else if (lep.getClass().getSimpleName().equals("LMM_EntityLittleMaidAvatar")) {
-								// LMM用特殊除外処理
-								try {
-									lentity = (Entity)lep.getClass().getField("avatar").get(lep);
-								} catch (Exception e) {
-								}
-							}
-							// 自身の周囲のMOBを獲得
-							List llist = par2World.getEntitiesWithinAABB(EntityLiving.class, par3Entity.boundingBox.expand(5D, 0D, 5D));
-							for (int lj = 0; lj < llist.size(); lj++) {
-								// 自分と通常の処理対象は除外
-								EntityLiving lel = (EntityLiving)llist.get(lj);
-								if (lel == lentity || lel == lep) continue;
-								// 射程距離の判定、MOBの大きさを考慮
-								double lln = 3.0D + (double)lel.width;
-								lln *= lln;
-								if (lep.getDistanceSqToEntity(lel) <= lln) {
-									// 範囲攻撃の対象
-									double lvx = lel.posX - lep.posX;
-									double lvz = lep.posZ - lel.posZ;
-									float lyaw = (float)Math.toDegrees(Math.atan2(lvx, lvz));
-									float lf = lep.rotationYaw - lyaw;
-									for (;lf > 360F; lf -= 360);
-									for (;lf < 0F; lf += 360);
-									// 左230dig - 正面180deg - 右100dig
-									if (lf > 100F && lf < 230F) {
-										// 攻撃判定
-//										System.out.println(String.format("%s, %d : %d : %f/%f : %f/%f", lel.getClass().getSimpleName(), lep.swingProgressInt, lep.attackTime, lep.getDistanceSqToEntity(lel), lln, lep.rotationYawHead, lf));
-										ModLoader.clientSendPacket(new Packet7UseEntity(lep.entityId, lel.entityId, 1));
-										lep.attackTargetEntityWithCurrentItem(lel);
-									}
-								}
-							}
-							
-							// クールタイム
-							lep.attackTime = 20;
+							fcanattack = true;
 						}
 					}
-					if (par3Entity == MMM_Helper.mc.thePlayer) {
-						IHW_ScytheAxe.setLeftClickCounter(lep.attackTime);
+				}
+				if (par3Entity == lmc.thePlayer) {
+					IHW_ScytheAxe.setLeftClickCounter(lep.attackTime);
+				}
+			}
+		} else if (par3Entity instanceof EntityLiving) {
+			if (!par2World.isRemote) {
+				// Server
+				lep = (EntityPlayer)MMM_Helper.getAvatarPlayer(par3Entity);
+				if (lep != par3Entity) {
+					// メイドさんである
+					lentity = ((EntityLiving)par3Entity).getAttackTarget();
+					if (lentity == null) {
+						lentity = ((EntityCreature)par3Entity).getEntityToAttack();
+					}
+					if (lep.getHeldItem() == par1ItemStack) {
+						// 腕の振り始めを検出して判定開始
+						if (lep.isSwingInProgress) {
+							if (lep.swingProgressInt == -1) {
+								fcanattack = true;
+							}
+						}
+					}
+				} else {
+					fcanattack = ((EntityLiving)par3Entity).attackTime == 0;
+				}
+			}
+		}
+		
+		if (fcanattack) {
+			// 自身の周囲のMOBを獲得
+			List llist = par2World.getEntitiesWithinAABB(EntityLiving.class, par3Entity.boundingBox.expand(5D, 0D, 5D));
+//			System.out.println(String.format("AttackAround: %d", llist.size()));
+			for (int lj = 0; lj < llist.size(); lj++) {
+				// 自分と通常の処理対象は除外
+				EntityLiving lel = (EntityLiving)llist.get(lj);
+				if (lel == par3Entity || lel == lentity || lel == lep) continue;
+				// 射程距離の判定、MOBの大きさを考慮
+				double lln = 3.0D + (double)lel.width;
+				lln *= lln;
+				if (par3Entity.getDistanceSqToEntity(lel) <= lln) {
+					// 範囲攻撃の対象
+					double lvx = lel.posX - par3Entity.posX;
+					double lvz = par3Entity.posZ - lel.posZ;
+					float lyaw = (float)Math.toDegrees(Math.atan2(lvx, lvz));
+					float lf = par3Entity.rotationYaw - lyaw;
+					for (;lf > 360F; lf -= 360);
+					for (;lf < 0F; lf += 360);
+					// 左230dig - 正面180deg - 右100dig
+//					if (lep != null) {
+//						System.out.println(String.format("%s, %d : %d : %f/%f : %f/%f", lel.getClass().getSimpleName(), lep.swingProgressInt, lep.attackTime, lep.getDistanceSqToEntity(lel), lln, lep.rotationYawHead, lf));
+//					}
+					if (lf > 100F && lf < 230F) {
+						// 攻撃判定
+//						System.out.println(String.format("Attack"));
+//						System.out.println(String.format("%s, %d : %d : %f/%f : %f/%f", lel.getClass().getSimpleName(), lep.swingProgressInt, lep.attackTime, lep.getDistanceSqToEntity(lel), lln, lep.rotationYawHead, lf));
+						if (par2World.isRemote) {
+							ModLoader.clientSendPacket(new Packet7UseEntity(lep.entityId, lel.entityId, 1));
+						}
+						if (lep != null) {
+							lep.attackTargetEntityWithCurrentItem(lel);
+						} else {
+							par3Entity.attackEntityFrom(DamageSource.causeMobDamage((EntityLiving)par3Entity), getDamageVsEntity(lel));
+						}
 					}
 				}
 			}
 			
+			// クールタイム
+			lep.attackTime = 20;
 		}
 	}
 
