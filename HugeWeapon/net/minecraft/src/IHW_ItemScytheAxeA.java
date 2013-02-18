@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
 
-public class IHW_ItemScytheAxeA extends ItemAxe implements MMM_IItemRender, IHW_IItemScytheAxe {
+public class IHW_ItemScytheAxeA extends ItemAxe implements IHW_IItemScytheAxe {
 
 	protected IHW_ItemScytheAxeA(int par1) {
 		super(par1, EnumToolMaterial.IRON);
@@ -77,22 +77,17 @@ public class IHW_ItemScytheAxeA extends ItemAxe implements MMM_IItemRender, IHW_
 		return EnumAction.block;
 	}
 
+	// 独自のアイテムレンダラ
 	public boolean renderItem(EntityLiving pEntity, ItemStack pItemstack, int pIndex) {
-		// 独自のアイテムレンダラ
 		return IHW_ScytheAxe.renderItem(pEntity, pItemstack, pIndex);
 	}
-
-	@Override
 	public boolean renderItemInFirstPerson(float pDelta) {
-		// TODO Auto-generated method stub
 		return false;
 	}
-
-	@Override
 	public String getRenderTexture() {
 		return "/item/ScytheAxe.png";
 	}
-	
+
 	@Override
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
 		par3List.add("\u00a79Axe Mode");

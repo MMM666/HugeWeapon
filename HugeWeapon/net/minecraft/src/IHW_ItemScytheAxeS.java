@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
 
-public class IHW_ItemScytheAxeS extends ItemShears implements MMM_IItemRender, IHW_IItemScytheAxe {
+public class IHW_ItemScytheAxeS extends ItemShears implements IHW_IItemScytheAxe {
 
 	protected IHW_ItemScytheAxeS(int par1) {
 		super(par1);
@@ -157,18 +157,13 @@ public class IHW_ItemScytheAxeS extends ItemShears implements MMM_IItemRender, I
 		return EnumAction.block;
 	}
 
+	// 独自のアイテムレンダラ
 	public boolean renderItem(EntityLiving pEntity, ItemStack pItemstack, int pIndex) {
-		// 独自のアイテムレンダラ
 		return IHW_ScytheAxe.renderItem(pEntity, pItemstack, pIndex);
 	}
-
-	@Override
 	public boolean renderItemInFirstPerson(float pDelta) {
-		// TODO Auto-generated method stub
 		return false;
 	}
-
-	@Override
 	public String getRenderTexture() {
 		return "/item/ScytheAxe.png";
 	}
