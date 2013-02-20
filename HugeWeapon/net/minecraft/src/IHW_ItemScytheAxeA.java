@@ -81,7 +81,7 @@ public class IHW_ItemScytheAxeA extends ItemAxe implements IHW_IItemScytheAxe {
 	public boolean renderItem(EntityLiving pEntity, ItemStack pItemstack, int pIndex) {
 		return IHW_ScytheAxe.renderItem(pEntity, pItemstack, pIndex);
 	}
-	public boolean renderItemInFirstPerson(float pDelta) {
+	public boolean renderItemInFirstPerson(float pDelta, MMM_IItemRenderer pItemRenderer) {
 		return false;
 	}
 	public String getRenderTexture() {
