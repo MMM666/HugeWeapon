@@ -14,7 +14,7 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.4.7-3";
+		return "1.5.0-1";
 	}
 
 	@Override
@@ -30,11 +30,10 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 	@Override
 	public void load() {
 		if (ScytheAxeID > -1) {
-			int licon = MMM_Helper.isForge ? 3 : ModLoader.addOverride("/gui/items.png", "/icon/ScytheAxe.png");
-			ScytheAxeA = new IHW_ItemScytheAxeA(ScytheAxeID - 256).setItemName("ScytheAxeA").setIconIndex(licon);
-			ScytheAxeS = new IHW_ItemScytheAxeS(ScytheAxeID - 256 + 1).setItemName("ScytheAxeS").setIconIndex(licon);
+			ScytheAxeA = new IHW_ItemScytheAxeA(ScytheAxeID - 256).setUnlocalizedName("ScytheAxe");
+			ScytheAxeS = new IHW_ItemScytheAxeS(ScytheAxeID - 256 + 1).setUnlocalizedName("ScytheAxe");
 			ModLoader.addName(ScytheAxeA, "ScytheAxe");
-			ModLoader.addName(ScytheAxeS, "ScytheAxe");
+//			ModLoader.addName(ScytheAxeS, "ScytheAxe");
 			ModLoader.addRecipe(new ItemStack(ScytheAxeA),
 					" I ",
 					"IAI",
@@ -44,8 +43,6 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 					'S', Item.stick
 					);
 //			MinecraftForgeClient.registerItemRenderer(ScytheAxeID, (IHW_ItemScytheAxe)ScytheAxe);
-			MMM_Helper.setForgeIcon(ScytheAxeA);
-			MMM_Helper.setForgeIcon(ScytheAxeS);
 		}
 		
 		// カスタムパケットの追加
