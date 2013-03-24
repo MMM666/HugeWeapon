@@ -88,6 +88,10 @@ public class IHW_ItemScytheAxeA extends ItemAxe implements IHW_IItemScytheAxe {
 		return "/item/ScytheAxe.png";
 	}
 
+	public boolean isRenderItemWorld() {
+		return IHW_ScytheAxe.isRenderItemWorld();
+	}
+
 	@Override
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
 		par3List.add("\u00a79Axe Mode");

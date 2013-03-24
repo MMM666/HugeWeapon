@@ -14,7 +14,7 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.5.0-1";
+		return "1.5.1-1";
 	}
 
 	@Override

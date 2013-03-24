@@ -168,6 +168,10 @@ public class IHW_ItemScytheAxeS extends ItemShears implements IHW_IItemScytheAxe
 		return "/item/ScytheAxe.png";
 	}
 
+	public boolean isRenderItemWorld() {
+		return IHW_ScytheAxe.isRenderItemWorld();
+	}
+
 	@Override
 	public boolean canHarvestBlock(Block par1Block) {
 		return super.canHarvestBlock(par1Block) || par1Block instanceof BlockLeaves;

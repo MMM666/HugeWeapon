@@ -43,7 +43,7 @@ public class IHW_ScytheAxe {
 		// クリック動作封印用
 		try {
 			// leftClickCounter
-			ModLoader.setPrivateValue(Minecraft.class, MMM_Helper.mc, 28, Integer.valueOf(pvalue));
+			ModLoader.setPrivateValue(Minecraft.class, MMM_Helper.mc, 30, Integer.valueOf(pvalue));
 		} catch (Exception e) {
 			
 		}
@@ -62,6 +62,10 @@ public class IHW_ScytheAxe {
 		fModel.setRotationAngles(0, 0, 0, 0, 0, 0, pItemstack);
 		fModel.renderItem(pItemstack, pEntity, MMM_Helper.mc.gameSettings.thirdPersonView);
 		return true;
+	}
+
+	public static boolean isRenderItemWorld() {
+		return false;
 	}
 
 
