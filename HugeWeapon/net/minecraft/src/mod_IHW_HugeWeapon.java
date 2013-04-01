@@ -39,7 +39,7 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 					"IAI",
 					"S  ",
 					'I', Item.ingotIron,
-					'A', Item.axeSteel,
+					'A', Item.axeIron,
 					'S', Item.stick
 					);
 //			MinecraftForgeClient.registerItemRenderer(ScytheAxeID, (IHW_ItemScytheAxe)ScytheAxe);
