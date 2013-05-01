@@ -7,14 +7,21 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 
 	@MLProp(info="ItemID +0..+1 (shiftedindex = -256. -1 is Items Disable.)", min=4096, max=32000)
 	public static int ScytheAxeID = 22270;
-
+	@MLProp(info="ItemID (shiftedindex = -256. -1 is Items Disable.)", min=4096, max=32000)
+	public static int MoonLightID = 22272;
+	@MLProp
+	public static boolean isDebugMessage = true;
+	
 	public static Item ScytheAxeA;
 	public static Item ScytheAxeS;
+	public static Item MoonLight;
 
 
-	@Override
-	public String getVersion() {
-		return "1.5.1-1";
+	public static void Debug(String pText, Object... pVals) {
+		// デバッグメッセージ
+		if (isDebugMessage) {
+			System.out.println(String.format("HugeWeapon-" + pText, pVals));
+		}
 	}
 
 	@Override
@@ -28,12 +35,19 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 	}
 
 	@Override
+	public String getVersion() {
+		return "1.5.1-2";
+	}
+
+	@Override
 	public void load() {
+		// MMMLibのRevisionチェック
+		MMM_Helper.checkRevision("1");
+		
 		if (ScytheAxeID > -1) {
 			ScytheAxeA = new IHW_ItemScytheAxeA(ScytheAxeID - 256).setUnlocalizedName("ScytheAxe");
 			ScytheAxeS = new IHW_ItemScytheAxeS(ScytheAxeID - 256 + 1).setUnlocalizedName("ScytheAxe");
 			ModLoader.addName(ScytheAxeA, "ScytheAxe");
-//			ModLoader.addName(ScytheAxeS, "ScytheAxe");
 			ModLoader.addRecipe(new ItemStack(ScytheAxeA),
 					" I ",
 					"IAI",
@@ -42,7 +56,17 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 					'A', Item.axeIron,
 					'S', Item.stick
 					);
-//			MinecraftForgeClient.registerItemRenderer(ScytheAxeID, (IHW_ItemScytheAxe)ScytheAxe);
+		}
+		if (MoonLightID > -1) {
+			MoonLight = new IHW_ItemMoonLight(MoonLightID - 256).setUnlocalizedName("MoonLight");
+			ModLoader.addName(MoonLight, "MoonLight");
+			ModLoader.addRecipe(new ItemStack(MoonLight),
+					"  I",
+					"II ",
+					"  S",
+					'I', Item.ingotIron,
+					'S', Item.swordIron
+					);
 		}
 		
 		// カスタムパケットの追加

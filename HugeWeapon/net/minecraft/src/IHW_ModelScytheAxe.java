@@ -5,7 +5,7 @@ import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-public class IHW_ModelScytheAxe extends ModelBase {
+public class IHW_ModelScytheAxe extends IHW_ModelBase {
 
 	public ModelRenderer fGrip;
 	public ModelRenderer fPole;
@@ -15,8 +15,9 @@ public class IHW_ModelScytheAxe extends ModelBase {
 	public ModelRenderer fBladeF20;
 	public ModelRenderer fBladeF21;
 	public ModelRenderer fBladeB10;
-	
-	
+
+
+
 	public IHW_ModelScytheAxe() {
 		
 		fBladeF21 = new ModelRenderer(this);
@@ -117,10 +118,7 @@ public class IHW_ModelScytheAxe extends ModelBase {
 		}
 		
 	}
-	
-	public void setLivingAnimations(ItemStack pitem, float par2, float par3, float par4) {
-	}
-	
+
 	public void renderItem(ItemStack pitem, EntityLiving pentity, int pThirdPersonView) {
 		GL11.glPushMatrix();
 		
@@ -141,5 +139,5 @@ public class IHW_ModelScytheAxe extends ModelBase {
 		
 		GL11.glPopMatrix();
 	}
-	
+
 }

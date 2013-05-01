@@ -4,7 +4,8 @@ import net.minecraft.client.Minecraft;
 
 public class IHW_ScytheAxe {
 
-	public static final IHW_ModelScytheAxe fModel = new IHW_ModelScytheAxe();
+	public static final IHW_ModelBase fModel = new IHW_ModelScytheAxe();
+
 
 
 	public static void setScythe(ItemStack pitem, boolean pflag) {
