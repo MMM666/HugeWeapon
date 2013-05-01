@@ -10,6 +10,7 @@ public class IHW_MoonLight {
 
 	public static void setENMode(ItemStack pItemstack, boolean pFlag) {
 		pItemstack.setTagInfo("ENMode", new NBTTagByte("ENMode", (byte)(pFlag ? 1 : 0)));
+		pItemstack.itemID = pFlag ? mod_IHW_HugeWeapon.MoonLightB.itemID : mod_IHW_HugeWeapon.MoonLightN.itemID;
 	}
 
 	public static boolean isENMode(ItemStack pItemstack) {
@@ -38,8 +39,6 @@ public class IHW_MoonLight {
 		return false;
 	}
 
-
-
 	public static boolean hitEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving, EntityLiving par3EntityLiving) {
 		par1ItemStack.damageItem(1, par3EntityLiving);
 		return true;
@@ -47,11 +46,6 @@ public class IHW_MoonLight {
 
 	public static boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack) {
 		return EnumToolMaterial.IRON.getToolCraftingMaterial() == par2ItemStack.itemID;
-	}
-
-	public static void onUpdate(ItemStack par1ItemStack, World par2World,
-			Entity par3Entity, int par4, boolean par5) {
-		// ã§í ìÆçÏ
 	}
 
 

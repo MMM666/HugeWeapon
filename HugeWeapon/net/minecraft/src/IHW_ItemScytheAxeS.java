@@ -143,7 +143,7 @@ public class IHW_ItemScytheAxeS extends ItemShears implements IHW_IItemScytheAxe
 			}
 			
 			// クールタイム
-			lep.attackTime = 20;
+			lep.attackTime = 15;
 		}
 	}
 

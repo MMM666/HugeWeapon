@@ -51,7 +51,7 @@ public class IHW_ScytheAxe {
 	}
 
 	public static void setMaxDamage(Item pItem) {
-		pItem.setMaxDamage(375);
+		pItem.setMaxDamage(260);
 	}
 
 	public static boolean checkMode(ItemStack pItemstack) {

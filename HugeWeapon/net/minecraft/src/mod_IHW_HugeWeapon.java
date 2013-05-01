@@ -7,14 +7,15 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 
 	@MLProp(info="ItemID +0..+1 (shiftedindex = -256. -1 is Items Disable.)", min=4096, max=32000)
 	public static int ScytheAxeID = 22270;
-	@MLProp(info="ItemID (shiftedindex = -256. -1 is Items Disable.)", min=4096, max=32000)
+	@MLProp(info="ItemID +0..+1 (shiftedindex = -256. -1 is Items Disable.)", min=4096, max=32000)
 	public static int MoonLightID = 22272;
 	@MLProp
 	public static boolean isDebugMessage = true;
 	
 	public static Item ScytheAxeA;
 	public static Item ScytheAxeS;
-	public static Item MoonLight;
+	public static Item MoonLightN;
+	public static Item MoonLightB;
 
 
 	public static void Debug(String pText, Object... pVals) {
@@ -58,9 +59,10 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 					);
 		}
 		if (MoonLightID > -1) {
-			MoonLight = new IHW_ItemMoonLight(MoonLightID - 256).setUnlocalizedName("MoonLight");
-			ModLoader.addName(MoonLight, "MoonLight");
-			ModLoader.addRecipe(new ItemStack(MoonLight),
+			MoonLightN = new IHW_ItemMoonLight(MoonLightID - 256, false).setUnlocalizedName("MoonLight");
+			MoonLightB = new IHW_ItemMoonLight(MoonLightID - 256 + 1, true).setUnlocalizedName("MoonLight");
+			ModLoader.addName(MoonLightN, "MoonLight");
+			ModLoader.addRecipe(new ItemStack(MoonLightN),
 					"  I",
 					"II ",
 					"  S",
@@ -85,6 +87,10 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 				((WorldServer)var1.playerEntity.worldObj).getEntityTracker().sendPacketToAllAssociatedPlayers(var1.playerEntity, new Packet250CustomPayload("IHW", new byte[] {0x00}));
 //				System.out.println("IHW_Server.");
 			}
+		}
+		if (var2.data[0] == 0x01 && litemstack.getItem() instanceof IHW_ItemMoonLight) {
+			// ïœå`ÉgÉäÉKÅ[
+			IHW_MoonLight.setENMode(litemstack, !IHW_MoonLight.isENMode(litemstack));
 		}
 	}
 
