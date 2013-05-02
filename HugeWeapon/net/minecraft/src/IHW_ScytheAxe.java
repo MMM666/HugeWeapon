@@ -60,7 +60,7 @@ public class IHW_ScytheAxe {
 
 	public static boolean renderItem(EntityLiving pEntity, ItemStack pItemstack, int pIndex) {
 		// 独自のアイテムレンダラ
-		fModel.setRotationAngles(0, 0, 0, 0, 0, 0, pItemstack);
+		fModel.setRotationAngles(pItemstack, pEntity, MMM_Helper.mc.gameSettings.thirdPersonView);
 		fModel.renderItem(pItemstack, pEntity, MMM_Helper.mc.gameSettings.thirdPersonView);
 		return true;
 	}

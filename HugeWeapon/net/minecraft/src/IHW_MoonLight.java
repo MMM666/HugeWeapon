@@ -1,11 +1,12 @@
 package net.minecraft.src;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.Minecraft;
 
 public class IHW_MoonLight {
 
 	public static final IHW_ModelBase fModel = new IHW_ModelMoonLight();
-
 
 
 	public static void setENMode(ItemStack pItemstack, boolean pFlag) {
@@ -20,33 +21,19 @@ public class IHW_MoonLight {
 		return false;
 	}
 
-	public static void setMaxDamage(Item pItem) {
-		pItem.setMaxDamage(420);
-	}
-
-	public static boolean checkMode(ItemStack pItemstack) {
-		return ((IHW_IItemScytheAxe)pItemstack.getItem()).isScythe() == isENMode(pItemstack);
-	}
-
 	public static boolean renderItem(EntityLiving pEntity, ItemStack pItemstack, int pIndex) {
 		// 独自のアイテムレンダラ
-		fModel.setRotationAngles(0, 0, 0, 0, 0, 0, pItemstack);
-		fModel.renderItem(pItemstack, pEntity, MMM_Helper.mc.gameSettings.thirdPersonView);
+		fModel.setRotationAngles(pItemstack, pEntity, MMM_Helper.mc.gameSettings.thirdPersonView);
+		if (pIndex == 0) {
+			fModel.renderItem(pItemstack, pEntity, MMM_Helper.mc.gameSettings.thirdPersonView);
+		} else {
+			fModel.renderSpecial(pItemstack, pEntity, MMM_Helper.mc.gameSettings.thirdPersonView);
+		}
 		return true;
 	}
 
 	public static boolean isRenderItemWorld() {
 		return false;
 	}
-
-	public static boolean hitEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving, EntityLiving par3EntityLiving) {
-		par1ItemStack.damageItem(1, par3EntityLiving);
-		return true;
-	}
-
-	public static boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack) {
-		return EnumToolMaterial.IRON.getToolCraftingMaterial() == par2ItemStack.itemID;
-	}
-
 
 }

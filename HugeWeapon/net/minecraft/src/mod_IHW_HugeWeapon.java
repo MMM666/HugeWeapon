@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import java.util.Map;
+
 import net.minecraft.client.Minecraft;
 
 
@@ -9,6 +11,8 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 	public static int ScytheAxeID = 22270;
 	@MLProp(info="ItemID +0..+1 (shiftedindex = -256. -1 is Items Disable.)", min=4096, max=32000)
 	public static int MoonLightID = 22272;
+	@MLProp(info="Enable LightWave")
+	public static boolean isLightWave = true;
 	@MLProp
 	public static boolean isDebugMessage = true;
 	
@@ -16,6 +20,7 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 	public static Item ScytheAxeS;
 	public static Item MoonLightN;
 	public static Item MoonLightB;
+	public static Class classLightWave;
 
 
 	public static void Debug(String pText, Object... pVals) {
@@ -43,8 +48,9 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 	@Override
 	public void load() {
 		// MMMLibのRevisionチェック
-		MMM_Helper.checkRevision("1");
+		MMM_Helper.checkRevision("5");
 		
+		// 攻撃方法と威力を分けるためにアイテムを２つ用意している。
 		if (ScytheAxeID > -1) {
 			ScytheAxeA = new IHW_ItemScytheAxeA(ScytheAxeID - 256).setUnlocalizedName("ScytheAxe");
 			ScytheAxeS = new IHW_ItemScytheAxeS(ScytheAxeID - 256 + 1).setUnlocalizedName("ScytheAxe");
@@ -61,18 +67,44 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 		if (MoonLightID > -1) {
 			MoonLightN = new IHW_ItemMoonLight(MoonLightID - 256, false).setUnlocalizedName("MoonLight");
 			MoonLightB = new IHW_ItemMoonLight(MoonLightID - 256 + 1, true).setUnlocalizedName("MoonLight");
-			ModLoader.addName(MoonLightN, "MoonLight");
+			ModLoader.addName(MoonLightN, "MOONLIGHT");
 			ModLoader.addRecipe(new ItemStack(MoonLightN),
 					"  I",
 					"II ",
-					"  S",
+					" S ",
 					'I', Item.ingotIron,
 					'S', Item.swordIron
 					);
+			int leid = MMM_Helper.getNextEntityID(false);
+			classLightWave = MMM_Helper.getForgeClass(this, "IHW_EntityLightWave");
+			if (isLightWave) {
+				ModLoader.registerEntityID(classLightWave, "LightWave", leid);
+				ModLoader.addEntityTracker(this, classLightWave, leid, 64, 10, false);
+			}
 		}
 		
 		// カスタムパケットの追加
 		ModLoader.registerPacketChannel(this, "IHW");
+	}
+
+	@Override
+	public void addRenderer(Map var1) {
+		var1.put(classLightWave, new IHW_RenderLightWave());
+	}
+
+	@Override
+	public Packet23VehicleSpawn getSpawnPacket(Entity var1, int var2) {
+		// Modloader
+		Entity lentity = ((IHW_EntityLightWave)var1).getThrower();
+		return new IHW_PacketLightWaveSpawn(var1, 0, lentity == null ? 0 : lentity.entityId);
+	}
+
+	@Override
+	public Entity spawnEntity(int var1, World var2, double var3, double var5, double var7) {
+		// Forge
+		IHW_EntityLightWave lentity = new IHW_EntityLightWave_Forge(var2, var3, var5, var7);
+		lentity.entityId = var1;
+		return lentity;
 	}
 
 	@Override
@@ -89,8 +121,17 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 			}
 		}
 		if (var2.data[0] == 0x01 && litemstack.getItem() instanceof IHW_ItemMoonLight) {
-			// 変形トリガー
+			// 発振
 			IHW_MoonLight.setENMode(litemstack, !IHW_MoonLight.isENMode(litemstack));
+		}
+		if (var2.data[0] == 0x02 && litemstack.getItem() instanceof IHW_ItemMoonLight) {
+			// 光波
+			if (isLightWave) {
+				World lworld = var1.playerEntity.worldObj;
+				IHW_EntityLightWave lentity = getEntity(lworld, var1.playerEntity);
+				lworld.spawnEntityInWorld(lentity);
+				litemstack.damageItem(2, var1.playerEntity);
+			}
 		}
 	}
 
@@ -104,5 +145,14 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 			IHW_ScytheAxe.setCount(litemstack, 10);
 		}
 	}
-	
+
+	public static IHW_EntityLightWave getEntity(World par1World, EntityLiving par2EntityLiving) {
+		try {
+			return (IHW_EntityLightWave)classLightWave.getConstructor(World.class, EntityLiving.class).newInstance(par1World, par2EntityLiving);
+		} catch (Exception e) {
+//		} catch (Error e) {
+		}
+		return null;
+	}
+
 }

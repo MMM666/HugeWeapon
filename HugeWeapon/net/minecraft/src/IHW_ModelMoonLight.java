@@ -1,6 +1,7 @@
 package net.minecraft.src;
 
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL13;
 
 public class IHW_ModelMoonLight extends IHW_ModelBase {
 
@@ -27,7 +28,7 @@ public class IHW_ModelMoonLight extends IHW_ModelBase {
 
 
 	public IHW_ModelMoonLight() {
-		
+		// ソリッドブレード
 		fBladePadding1 = new MMM_ModelRenderer(this);
 		fBladePadding1.setTextureOffset(38, 14).addBox(-1.0F, -3.0F, 0.0F, 2, 3, 4, 0.05F);
 		fBladePadding1.setRotationPoint(0.0F, -6.0F, 0.0F);
@@ -181,12 +182,7 @@ public class IHW_ModelMoonLight extends IHW_ModelBase {
 	}
 
 	@Override
-	public void setRotationAngles(float par1, float par2, float par3,
-			float par4, float par5, float par6, ItemStack pitem) {
-	}
-
-	public void renderItem(ItemStack pitem, EntityLiving pentity, int pThirdPersonView) {
-		GL11.glPushMatrix();
+	public void setRotationAngles(ItemStack pitem, EntityLiving pentity, int pThirdPersonView) {
 		float lscale = 0.10F;
 		EnumAction laction = getAction(pentity);
 		if (pThirdPersonView == 0 && MMM_Helper.mc.thePlayer == pentity) {
@@ -211,32 +207,43 @@ public class IHW_ModelMoonLight extends IHW_ModelBase {
 				GL11.glRotatef(-20.0F, 1.0F, 0.0F, 0.0F);
 			}
 		}
-		
+	}
+
+	public void renderItem(ItemStack pitem, EntityLiving pentity, int pThirdPersonView) {
 		fGrip.render(1.0F);
+	}
+
+	@Override
+	public void renderSpecial(ItemStack pitem, EntityLiving pentity, int pThirdPersonView) {
 		if (IHW_MoonLight.isENMode(pitem)) {
+			GL11.glPushMatrix();
+			
 			float var4 = (float)pentity.ticksExisted + 0F;
 			GL11.glMatrixMode(GL11.GL_TEXTURE);
 			GL11.glLoadIdentity();
 			float var6 = var4 * 0.125F;
 			GL11.glTranslatef(0.0F, var6, 0.0F);
+			
 			GL11.glMatrixMode(GL11.GL_MODELVIEW);
 			GL11.glEnable(GL11.GL_BLEND);
-			float var7 = 0.5F;
-			GL11.glColor4f(var7, var7, var7, 1.0F);
 			GL11.glDisable(GL11.GL_LIGHTING);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+			MMM_Helper.mc.entityRenderer.disableLightmap(0D);
+			
+			float var7 = 0.8F;
+			GL11.glColor4f(var7, var7, var7, 1.0F);
 			
 			fBeam.render(1.0F);
 			
+			MMM_Helper.mc.entityRenderer.enableLightmap(0D);
 			GL11.glMatrixMode(GL11.GL_TEXTURE);
 			GL11.glLoadIdentity();
 			GL11.glMatrixMode(GL11.GL_MODELVIEW);
 			GL11.glEnable(GL11.GL_LIGHTING);
 			GL11.glDisable(GL11.GL_BLEND);
 			
+			GL11.glPopMatrix();
 		}
-		
-		GL11.glPopMatrix();
 	}
 
 }

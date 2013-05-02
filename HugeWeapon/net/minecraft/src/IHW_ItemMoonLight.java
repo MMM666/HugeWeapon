@@ -27,8 +27,14 @@ public class IHW_ItemMoonLight extends ItemSword {
 	}
 
 	@Override
+	public boolean requiresMultipleRenderPasses() {
+		return true;
+	}
+
+	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
 		mod_IHW_HugeWeapon.Debug("ENMode : %s", IHW_MoonLight.isENMode(par1ItemStack));
+		
 		return super.onItemRightClick(par1ItemStack, par2World, par3EntityPlayer);
 	}
 
@@ -36,29 +42,26 @@ public class IHW_ItemMoonLight extends ItemSword {
 	public void onUpdate(ItemStack par1ItemStack, World par2World,
 			Entity par3Entity, int par4, boolean par5) {
 		super.onUpdate(par1ItemStack, par2World, par3Entity, par4, par5);
-		if (IHW_MoonLight.isENMode(par1ItemStack)) {
-			if (par3Entity instanceof EntityPlayer) {
-				EntityPlayer lPlayer = (EntityPlayer)par3Entity;
-				if (lPlayer.foodStats.getFoodLevel() > 0) {
-					// フルチャージ（胃袋）で約２０秒程持つ
-					lPlayer.addExhaustion(0.1F);
-				} if (lPlayer.getCurrentEquippedItem() == par1ItemStack) {
-					// 使用中ならエネルギー放出継続
-				}else {
-					// 空腹状態ではエネルギー放出を停止
-					IHW_MoonLight.setENMode(par1ItemStack, false);
-				}
-			} else {
-				IHW_MoonLight.setENMode(par1ItemStack, false);
-			}
-		}
+		
+		boolean lflag = IHW_MoonLight.isENMode(par1ItemStack);
 		if (par2World.isRemote) {
 			// Client
-			if (par3Entity instanceof EntityPlayer) {
-				EntityPlayer lPlayer = (EntityPlayer)par3Entity;
-				// 変形
-				if (lPlayer.getItemInUse() == par1ItemStack) {
-					// ガード中にクリックで変形
+			if (par3Entity instanceof EntityPlayerSP) {
+				EntityPlayerSP lplayer = (EntityPlayerSP)par3Entity;
+				// 光波
+				if (lflag && mod_IHW_HugeWeapon.isLightWave) {
+					int lcount = lplayer.sprintingTicksLeft;
+//					if (lcount > 594 && lplayer.swingProgressInt == -1) {
+					// 出し方はACと同じ
+					if (lcount == 600 && lplayer.isSwingInProgress) {
+						ModLoader.clientSendPacket(new Packet250CustomPayload("IHW", new byte[] {0x02}));
+						mod_IHW_HugeWeapon.Debug("Wave : %d & %d", lcount, lplayer.swingProgressInt);
+					}
+				}
+				
+				// 発振
+				if (lplayer.getItemInUse() == par1ItemStack) {
+					// ガード中にクリックで発振切り替え
 					if (MMM_Helper.mc.gameSettings.keyBindAttack.pressed) {
 						if (!isTrigger) {
 							ModLoader.clientSendPacket(new Packet250CustomPayload("IHW", new byte[] {0x01}));
@@ -69,6 +72,21 @@ public class IHW_ItemMoonLight extends ItemSword {
 					}
 					isTrigger = false;
 				}
+			}
+		}
+		if (lflag) {
+			if (par3Entity instanceof EntityPlayer) {
+				EntityPlayer lPlayer = (EntityPlayer)par3Entity;
+				if (lPlayer.foodStats.getFoodLevel() <= 0 ||
+						lPlayer.getCurrentEquippedItem() != par1ItemStack) {
+					// 未使用、空腹状態ではエネルギー放出を停止
+					IHW_MoonLight.setENMode(par1ItemStack, false);
+				} else {
+					// フルチャージ（胃袋）で約60秒程持つ
+					lPlayer.addExhaustion(0.13F);
+				}
+			} else {
+				IHW_MoonLight.setENMode(par1ItemStack, false);
 			}
 		}
 	}

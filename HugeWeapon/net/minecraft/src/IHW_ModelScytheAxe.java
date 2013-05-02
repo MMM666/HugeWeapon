@@ -67,8 +67,8 @@ public class IHW_ModelScytheAxe extends IHW_ModelBase {
 		
 	}
 
-	public void setRotationAngles(float par1, float par2, float par3,
-			float par4, float par5, float par6, ItemStack pitem) {
+	@Override
+	public void setRotationAngles(ItemStack pitem, EntityLiving pentity, int pThirdPersonView) {
 		// Œ`ó
 		int lc = IHW_ScytheAxe.getCount(pitem);
 		if (lc > 0) {
@@ -117,11 +117,6 @@ public class IHW_ModelScytheAxe extends IHW_ModelBase {
 			}
 		}
 		
-	}
-
-	public void renderItem(ItemStack pitem, EntityLiving pentity, int pThirdPersonView) {
-		GL11.glPushMatrix();
-		
 		if (pThirdPersonView == 0 && MMM_Helper.mc.thePlayer == pentity) {
 			// FirstPerson
 			GL11.glScalef(0.14F, 0.14F, 0.14F);
@@ -135,9 +130,14 @@ public class IHW_ModelScytheAxe extends IHW_ModelBase {
 			GL11.glRotatef(140.0F, 0.0F, 1.0F, 0.0F);
 			GL11.glRotatef(-20.0F, 1.0F, 0.0F, 0.0F);
 		}
+	}
+
+	public void renderItem(ItemStack pitem, EntityLiving pentity, int pThirdPersonView) {
 		fGrip.render(1.0F);
-		
-		GL11.glPopMatrix();
+	}
+
+	@Override
+	public void renderSpecial(ItemStack pitem, EntityLiving pentity, int pThirdPersonView) {
 	}
 
 }
