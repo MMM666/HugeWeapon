@@ -33,7 +33,7 @@ public class IHW_ItemMoonLight extends ItemSword {
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
-		mod_IHW_HugeWeapon.Debug("ENMode : %s", IHW_MoonLight.isENMode(par1ItemStack));
+//		mod_IHW_HugeWeapon.Debug("ENMode : %s", IHW_MoonLight.isENMode(par1ItemStack));
 		
 		return super.onItemRightClick(par1ItemStack, par2World, par3EntityPlayer);
 	}
@@ -55,7 +55,7 @@ public class IHW_ItemMoonLight extends ItemSword {
 					// èoÇµï˚ÇÕACÇ∆ìØÇ∂
 					if (lcount == 600 && lplayer.isSwingInProgress) {
 						ModLoader.clientSendPacket(new Packet250CustomPayload("IHW", new byte[] {0x02}));
-						mod_IHW_HugeWeapon.Debug("Wave : %d & %d", lcount, lplayer.swingProgressInt);
+//						mod_IHW_HugeWeapon.Debug("Wave : %d & %d", lcount, lplayer.swingProgressInt);
 					}
 				}
 				
@@ -65,7 +65,7 @@ public class IHW_ItemMoonLight extends ItemSword {
 					if (MMM_Helper.mc.gameSettings.keyBindAttack.pressed) {
 						if (!isTrigger) {
 							ModLoader.clientSendPacket(new Packet250CustomPayload("IHW", new byte[] {0x01}));
-							mod_IHW_HugeWeapon.Debug("Beam");
+//							mod_IHW_HugeWeapon.Debug("Beam");
 						}
 						isTrigger = true;
 						return;

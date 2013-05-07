@@ -1,4 +1,4 @@
-大型武器追加MOD HugeWeapon 1.5.1 Rev2
+大型武器追加MOD HugeWeapon 1.5.2 Rev1
 
 でっかい武器を追加します。
 
@@ -11,6 +11,7 @@
 
 使い方
 	・要Modloader。
+	・要MMMLib。
 	・%appdata%/.mincraft/modsにZIPのまま放りこめば動くはずです。
 	・%appdata%/.mincraft/config/mod_IHW_HugeWeapon.cfgができるので設定はそちらで。
 
@@ -40,7 +41,7 @@
 	I:IronIngot
 	A:IronAxe
 	S:Stick
-	A:IronSword
+	B:IronSword
 
 
 注意
@@ -51,13 +52,14 @@
 	・バランス的には対MOD追加MOB用なので通常MOBに対しては過剰です。
 
 変更点
+	20130507.1	1.5.2 Rev1 バージョンアップ
+
+
+
 	20130502.1	1.5.1 Rev2 更新
 				MOONLIGHTの追加。
 				ScythAxeの耐久力を下げた。
 				サイズモードのクールタイムを短くした。
-
-
-
 	20130325.1	1.5.1 Rev1 バージョンアップ
 				ドロップした時の表示がおかしくなっていたのを修正。
 	20130310.1	1.4.7 Rev3 更新

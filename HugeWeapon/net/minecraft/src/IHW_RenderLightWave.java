@@ -31,32 +31,24 @@ public class IHW_RenderLightWave extends Render {
 		double lpz[] = new double[] {8.0D, 12.0D, 18.0D, 25.0D};
 		
 		for (int li = 0; li < 4; li++) {
-			GL11.glNormal3f(0.0F, lscale, 0.0F);
-			var10.startDrawingQuads();
+//			GL11.glNormal3f(0.0F, lscale, 0.0F);
+			GL11.glNormal3f(-lscale, 0.0F, 0.0F);
+			var10.startDrawing(GL11.GL_TRIANGLE_FAN);
 			var10.addVertexWithUV(0.0D, 0.0D, 0.0D, 0.5D, 0.0D);
 			var10.addVertexWithUV(-lpx[li], 0.0D, -lpz[li], 0.0D, 1.0D);
 			var10.addVertexWithUV(0.0D, lpy[li], -lpz[li], 0.5D, 1.0D);
-			var10.addVertexWithUV(lpx[li], 0.0D, -lpz[li], 1.0D, 1.0D);
-			var10.draw();
-			GL11.glNormal3f(0.0F, -lscale, 0.0F);
-			var10.startDrawingQuads();
-			var10.addVertexWithUV(0.0D, 0.0D, 0.0D, 0.5D, 0.0D);
 			var10.addVertexWithUV(lpx[li], 0.0D, -lpz[li], 1.0D, 1.0D);
 			var10.addVertexWithUV(0.0D, -lpy[li], -lpz[li], 0.5D, 1.0D);
 			var10.addVertexWithUV(-lpx[li], 0.0D, -lpz[li], 0.0D, 1.0D);
 			var10.draw();
 		}
+		
 		for (int li = 3; li >= 0; li--) {
 			GL11.glNormal3f(0.0F, lscale, 0.0F);
-			var10.startDrawingQuads();
+			var10.startDrawing(GL11.GL_TRIANGLE_FAN);
 			var10.addVertexWithUV(0.0D, 0.0D, 0.0D, 0.5D, 0.0D);
 			var10.addVertexWithUV(lpx[li], 0.0D, -lpz[li], 0.0D, 1.0D);
 			var10.addVertexWithUV(0.0D, lpy[li], -lpz[li], 0.5D, 1.0D);
-			var10.addVertexWithUV(-lpx[li], 0.0D, -lpz[li], 1.0D, 1.0D);
-			var10.draw();
-			GL11.glNormal3f(0.0F, -lscale, 0.0F);
-			var10.startDrawingQuads();
-			var10.addVertexWithUV(0.0D, 0.0D, 0.0D, 0.5D, 0.0D);
 			var10.addVertexWithUV(-lpx[li], 0.0D, -lpz[li], 1.0D, 1.0D);
 			var10.addVertexWithUV(0.0D, -lpy[li], -lpz[li], 0.5D, 1.0D);
 			var10.addVertexWithUV(lpx[li], 0.0D, -lpz[li], 0.0D, 1.0D);

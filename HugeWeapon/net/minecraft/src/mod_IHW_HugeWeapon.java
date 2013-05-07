@@ -42,13 +42,13 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.5.1-2";
+		return "1.5.2-1";
 	}
 
 	@Override
 	public void load() {
 		// MMMLibのRevisionチェック
-		MMM_Helper.checkRevision("5");
+		MMM_Helper.checkRevision("1");
 		
 		// 攻撃方法と威力を分けるためにアイテムを２つ用意している。
 		if (ScytheAxeID > -1) {
@@ -102,7 +102,7 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 	@Override
 	public Entity spawnEntity(int var1, World var2, double var3, double var5, double var7) {
 		// Forge
-		IHW_EntityLightWave lentity = new IHW_EntityLightWave_Forge(var2, var3, var5, var7);
+		IHW_EntityLightWave lentity = getEntity(var2, var3, var5, var7);
 		lentity.entityId = var1;
 		return lentity;
 	}
@@ -149,6 +149,15 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 	public static IHW_EntityLightWave getEntity(World par1World, EntityLiving par2EntityLiving) {
 		try {
 			return (IHW_EntityLightWave)classLightWave.getConstructor(World.class, EntityLiving.class).newInstance(par1World, par2EntityLiving);
+		} catch (Exception e) {
+//		} catch (Error e) {
+		}
+		return null;
+	}
+
+	public static IHW_EntityLightWave getEntity(World par1World, double par2, double par4, double par6) {
+		try {
+			return (IHW_EntityLightWave)classLightWave.getConstructor(World.class, double.class, double.class, double.class).newInstance(par1World, par2, par4, par6);
 		} catch (Exception e) {
 //		} catch (Error e) {
 		}
