@@ -1,6 +1,6 @@
 package net.minecraft.src;
 
-public abstract class IHW_ModelBase extends ModelBase {
+public abstract class IHW_ModelBase extends MMM_ModelBase {
 
 	public abstract void setRotationAngles(ItemStack pitem, EntityLiving pentity, int pThirdPersonView);
 	public abstract void renderItem(ItemStack pitem, EntityLiving pentity, int pThirdPersonView);

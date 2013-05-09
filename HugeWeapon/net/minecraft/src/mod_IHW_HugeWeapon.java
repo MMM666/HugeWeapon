@@ -42,13 +42,13 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.5.2-1";
+		return "1.5.2-2";
 	}
 
 	@Override
 	public void load() {
 		// MMMLibのRevisionチェック
-		MMM_Helper.checkRevision("1");
+		MMM_Helper.checkRevision("2");
 		
 		// 攻撃方法と威力を分けるためにアイテムを２つ用意している。
 		if (ScytheAxeID > -1) {
