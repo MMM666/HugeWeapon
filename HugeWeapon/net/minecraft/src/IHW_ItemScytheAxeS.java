@@ -157,21 +157,6 @@ public class IHW_ItemScytheAxeS extends ItemShears implements IHW_IItemScytheAxe
 		return EnumAction.block;
 	}
 
-	// 独自のアイテムレンダラ
-	public boolean renderItem(EntityLiving pEntity, ItemStack pItemstack, int pIndex) {
-		return IHW_ScytheAxe.renderItem(pEntity, pItemstack, pIndex);
-	}
-	public boolean renderItemInFirstPerson(float pDelta, MMM_IItemRenderer pItemRenderer) {
-		return false;
-	}
-	public String getRenderTexture() {
-		return "/item/ScytheAxe.png";
-	}
-
-	public boolean isRenderItemWorld() {
-		return IHW_ScytheAxe.isRenderItemWorld();
-	}
-
 	@Override
 	public boolean canHarvestBlock(Block par1Block) {
 		return super.canHarvestBlock(par1Block) || par1Block instanceof BlockLeaves;

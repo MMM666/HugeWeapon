@@ -4,8 +4,9 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
 
-public class IHW_MoonLight {
+public class IHW_MoonLight implements MMM_IItemRenderManager {
 
+	public static IHW_MoonLight instance = new IHW_MoonLight();
 	public static final IHW_ModelBase fModel = new IHW_ModelMoonLight();
 
 
@@ -21,7 +22,8 @@ public class IHW_MoonLight {
 		return false;
 	}
 
-	public static boolean renderItem(EntityLiving pEntity, ItemStack pItemstack, int pIndex) {
+	@Override
+	public boolean renderItem(EntityLiving pEntity, ItemStack pItemstack, int pIndex) {
 		// 独自のアイテムレンダラ
 		fModel.setRotationAngles(pItemstack, pEntity, MMM_Helper.mc.gameSettings.thirdPersonView);
 		if (pIndex == 0) {
@@ -32,8 +34,19 @@ public class IHW_MoonLight {
 		return true;
 	}
 
-	public static boolean isRenderItemWorld() {
+	@Override
+	public boolean renderItemInFirstPerson(float pDeltaTimepRenderPhatialTick,
+			MMM_ItemRenderer pItemRenderer) {
 		return false;
+	}
+
+	@Override
+	public boolean isRenderItemWorld() {
+		return false;
+	}
+
+	public String getRenderTexture() {
+		return "/item/MoonLight.png";
 	}
 
 }

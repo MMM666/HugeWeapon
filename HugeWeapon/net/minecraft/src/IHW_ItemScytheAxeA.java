@@ -77,21 +77,6 @@ public class IHW_ItemScytheAxeA extends ItemAxe implements IHW_IItemScytheAxe {
 		return EnumAction.block;
 	}
 
-	// 独自のアイテムレンダラ
-	public boolean renderItem(EntityLiving pEntity, ItemStack pItemstack, int pIndex) {
-		return IHW_ScytheAxe.renderItem(pEntity, pItemstack, pIndex);
-	}
-	public boolean renderItemInFirstPerson(float pDelta, MMM_IItemRenderer pItemRenderer) {
-		return false;
-	}
-	public String getRenderTexture() {
-		return "/item/ScytheAxe.png";
-	}
-
-	public boolean isRenderItemWorld() {
-		return IHW_ScytheAxe.isRenderItemWorld();
-	}
-
 	@Override
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
 		par3List.add("\u00a79Axe Mode");

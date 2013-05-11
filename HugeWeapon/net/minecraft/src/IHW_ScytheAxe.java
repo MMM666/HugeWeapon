@@ -2,8 +2,9 @@ package net.minecraft.src;
 
 import net.minecraft.client.Minecraft;
 
-public class IHW_ScytheAxe {
+public class IHW_ScytheAxe implements MMM_IItemRenderManager {
 
+	public static IHW_ScytheAxe instance = new IHW_ScytheAxe();
 	public static final IHW_ModelBase fModel = new IHW_ModelScytheAxe();
 
 
@@ -58,17 +59,27 @@ public class IHW_ScytheAxe {
 		return ((IHW_IItemScytheAxe)pItemstack.getItem()).isScythe() == isScythe(pItemstack);
 	}
 
-	public static boolean renderItem(EntityLiving pEntity, ItemStack pItemstack, int pIndex) {
-		// 独自のアイテムレンダラ
+	// 独自のアイテムレンダラ
+	@Override
+	public boolean renderItem(EntityLiving pEntity, ItemStack pItemstack, int pIndex) {
 		fModel.setRotationAngles(pItemstack, pEntity, MMM_Helper.mc.gameSettings.thirdPersonView);
 		fModel.renderItem(pItemstack, pEntity, MMM_Helper.mc.gameSettings.thirdPersonView);
 		return true;
 	}
 
-	public static boolean isRenderItemWorld() {
+	@Override
+	public boolean renderItemInFirstPerson(float pDelta, MMM_ItemRenderer pItemRenderer) {
 		return false;
 	}
 
+	@Override
+	public boolean isRenderItemWorld() {
+		return false;
+	}
+
+	public String getRenderTexture() {
+		return "/item/ScytheAxe.png";
+	}
 
 
 	public static boolean hitEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving, EntityLiving par3EntityLiving) {

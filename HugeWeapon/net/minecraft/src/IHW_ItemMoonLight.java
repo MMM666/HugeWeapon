@@ -102,20 +102,4 @@ public class IHW_ItemMoonLight extends ItemSword {
 		return EnumToolMaterial.IRON.getToolCraftingMaterial() == par2ItemStack.itemID || super.getIsRepairable(par1ItemStack, par2ItemStack);
 	}
 
-
-	// 独自のアイテムレンダラ
-	public boolean renderItem(EntityLiving pEntity, ItemStack pItemstack, int pIndex) {
-		return IHW_MoonLight.renderItem(pEntity, pItemstack, pIndex);
-	}
-	public boolean renderItemInFirstPerson(float pDelta, MMM_IItemRenderer pItemRenderer) {
-		return false;
-	}
-	public String getRenderTexture() {
-		return "/item/MoonLight.png";
-	}
-
-	public boolean isRenderItemWorld() {
-		return IHW_MoonLight.isRenderItemWorld();
-	}
-
 }

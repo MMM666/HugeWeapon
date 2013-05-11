@@ -63,6 +63,9 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 					'A', Item.axeIron,
 					'S', Item.stick
 					);
+			// レンダラの登録
+			MMM_ItemRenderManager.setEXRender(ScytheAxeA, IHW_ScytheAxe.instance);
+			MMM_ItemRenderManager.setEXRender(ScytheAxeS, IHW_ScytheAxe.instance);
 		}
 		if (MoonLightID > -1) {
 			MoonLightN = new IHW_ItemMoonLight(MoonLightID - 256, false).setUnlocalizedName("MoonLight");
@@ -81,6 +84,9 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 				ModLoader.registerEntityID(classLightWave, "LightWave", leid);
 				ModLoader.addEntityTracker(this, classLightWave, leid, 64, 10, false);
 			}
+			// レンダラの登録
+			MMM_ItemRenderManager.setEXRender(MoonLightN, IHW_MoonLight.instance);
+			MMM_ItemRenderManager.setEXRender(MoonLightB, IHW_MoonLight.instance);
 		}
 		
 		// カスタムパケットの追加
