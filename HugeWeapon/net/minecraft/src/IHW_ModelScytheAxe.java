@@ -7,58 +7,58 @@ import org.lwjgl.opengl.GL12;
 
 public class IHW_ModelScytheAxe extends IHW_ModelBase {
 
-	public ModelRenderer fGrip;
-	public ModelRenderer fPole;
-	public ModelRenderer fBase;
-	public ModelRenderer fBladeF10;
-	public ModelRenderer fBladeF11;
-	public ModelRenderer fBladeF20;
-	public ModelRenderer fBladeF21;
-	public ModelRenderer fBladeB10;
+	public MMM_ModelRenderer fGrip;
+	public MMM_ModelRenderer fPole;
+	public MMM_ModelRenderer fBase;
+	public MMM_ModelRenderer fBladeF10;
+	public MMM_ModelRenderer fBladeF11;
+	public MMM_ModelRenderer fBladeF20;
+	public MMM_ModelRenderer fBladeF21;
+	public MMM_ModelRenderer fBladeB10;
 
 
 
 	public IHW_ModelScytheAxe() {
 		
-		fBladeF21 = new ModelRenderer(this);
+		fBladeF21 = new MMM_ModelRenderer(this);
 		fBladeF21.setTextureOffset(22, 0).addBox(-0.5F, -10.1F, 0.0F, 1, 12, 5);
 		fBladeF21.setTextureOffset(25, 17).addBox(-0.5F, -14.1F, 2.0F, 1, 4, 2);
 		
-		fBladeF20 = new ModelRenderer(this);
+		fBladeF20 = new MMM_ModelRenderer(this);
 		fBladeF20.setTextureOffset(13, 0).addBox(-1.25F, -2.25F, -1.0F, 1, 4, 3, -0.25F);
 		fBladeF20.setTextureOffset(13, 0).addBox(0.25F, -2.25F, -1.0F, 1, 4, 3, -0.25F);
 		fBladeF20.setTextureOffset(12, 7).addBox(-1.0F, -10.0F, 0.0F, 2, 8, 3);
 		fBladeF20.setRotationPoint(0.0F, 10.0F, 2.0F);
 		fBladeF20.addChild(fBladeF21);
 		
-		fBladeF11 = new ModelRenderer(this);
+		fBladeF11 = new MMM_ModelRenderer(this);
 		fBladeF11.setTextureOffset(47, 15).addBox(-0.5F, 0.0F, 0.0F, 1, 10, 2, -0.1F);
 		
-		fBladeF10 = new ModelRenderer(this);
+		fBladeF10 = new MMM_ModelRenderer(this);
 		fBladeF10.setTextureOffset(46, 0).addBox(-1.0F, 0.0F, 0.0F, 2, 8, 2);
 		fBladeF10.setTextureOffset(47, 10).addBox(-0.5F, 8.0F, 0.0F, 1, 3, 2);
 		fBladeF10.setRotationPoint(0.0F, 19.0F, 0.5F);
 		fBladeF10.addChild(fBladeF11);
 		fBladeF10.addChild(fBladeF20);
 		
-		fBladeB10 = new ModelRenderer(this);
+		fBladeB10 = new MMM_ModelRenderer(this);
 		fBladeB10.setTextureOffset(54, 0).addBox(-1.0F, 0.0F, -1.0F, 2, 7, 1);
 		fBladeB10.setTextureOffset(54, 8).addBox(-0.5F, 1.0F, -2.8F, 1, 9, 2);
 		fBladeB10.setRotationPoint(0.0F, 19.0F, -0.5F);
 		
 		
-		fBase = new ModelRenderer(this);
+		fBase = new MMM_ModelRenderer(this);
 		fBase.rotateAngleY = -(float)(Math.PI / 4D);
 		fBase.addChild(fBladeF10);
 		fBase.addChild(fBladeB10);
 		
-		fPole = new ModelRenderer(this);
+		fPole = new MMM_ModelRenderer(this);
 		fPole.setTextureOffset(60, 0).addBox(-0.5F, 4.0F, -0.5F, 1, 24, 1);
 		fPole.rotateAngleY = (float)(Math.PI / 4D);
 		fPole.addChild(fBase);
 		
 		
-		fGrip = new ModelRenderer(this);
+		fGrip = new MMM_ModelRenderer(this);
 		fGrip.setTextureOffset(3, 0).addBox(-0.5F, -5.0F, -1.0F, 1, 8, 2);
 		fGrip.setTextureOffset(0, 10).addBox(-1.0F, 3.0F, -2.0F, 2, 1, 4);
 		fGrip.setTextureOffset(0, 15).addBox(-1.0F, -7.0F, -2.0F, 2, 2, 4);
