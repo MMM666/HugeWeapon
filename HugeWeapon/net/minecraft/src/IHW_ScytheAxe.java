@@ -5,9 +5,16 @@ import net.minecraft.client.Minecraft;
 public class IHW_ScytheAxe implements MMM_IItemRenderManager {
 
 	public static IHW_ScytheAxe instance = new IHW_ScytheAxe();
-	public static final IHW_ModelBase fModel = new IHW_ModelScytheAxe();
+	public static final IHW_ModelBase fModel;
 
 
+	static {
+		if (MMM_Helper.isClient) {
+			fModel = new IHW_ModelScytheAxe();
+		} else {
+			fModel = null;
+		}
+	}
 
 	public static void setScythe(ItemStack pitem, boolean pflag) {
 		if (!pitem.hasTagCompound()) {

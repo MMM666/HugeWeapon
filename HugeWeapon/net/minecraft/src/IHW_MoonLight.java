@@ -7,8 +7,16 @@ import net.minecraft.client.Minecraft;
 public class IHW_MoonLight implements MMM_IItemRenderManager {
 
 	public static IHW_MoonLight instance = new IHW_MoonLight();
-	public static final IHW_ModelBase fModel = new IHW_ModelMoonLight();
+	public static final IHW_ModelBase fModel;
 
+
+	static {
+		if (MMM_Helper.isClient) {
+			fModel = new IHW_ModelMoonLight();
+		} else {
+			fModel = null;
+		}
+	}
 
 	public static void setENMode(ItemStack pItemstack, boolean pFlag) {
 		pItemstack.setTagInfo("ENMode", new NBTTagByte("ENMode", (byte)(pFlag ? 1 : 0)));

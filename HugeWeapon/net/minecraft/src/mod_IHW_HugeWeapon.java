@@ -63,9 +63,11 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 					'A', Item.axeIron,
 					'S', Item.stick
 					);
-			// ƒŒƒ“ƒ_ƒ‰‚Ì“o˜^
-			MMM_ItemRenderManager.setEXRender(ScytheAxeA, IHW_ScytheAxe.instance);
-			MMM_ItemRenderManager.setEXRender(ScytheAxeS, IHW_ScytheAxe.instance);
+			if (MMM_Helper.isClient) {
+				// ƒŒƒ“ƒ_ƒ‰‚Ì“o˜^
+				MMM_ItemRenderManager.setEXRender(ScytheAxeA, IHW_ScytheAxe.instance);
+				MMM_ItemRenderManager.setEXRender(ScytheAxeS, IHW_ScytheAxe.instance);
+			}
 		}
 		if (MoonLightID > -1) {
 			MoonLightN = new IHW_ItemMoonLight(MoonLightID - 256, false).setUnlocalizedName("MoonLight");
@@ -78,15 +80,18 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 					'I', Item.ingotIron,
 					'S', Item.swordIron
 					);
-			int leid = MMM_Helper.getNextEntityID(false);
+//			int leid = MMM_Helper.getNextEntityID(false);
 			classLightWave = MMM_Helper.getForgeClass(this, "IHW_EntityLightWave");
 			if (isLightWave) {
-				ModLoader.registerEntityID(classLightWave, "LightWave", leid);
-				ModLoader.addEntityTracker(this, classLightWave, leid, 64, 10, false);
+				MMM_Helper.registerEntity(classLightWave, "LightWave", 0, this, 64, 10, false);
+//				ModLoader.registerEntityID(classLightWave, "LightWave", leid);
+//				ModLoader.addEntityTracker(this, classLightWave, leid, 64, 10, false);
 			}
-			// ƒŒƒ“ƒ_ƒ‰‚Ì“o˜^
-			MMM_ItemRenderManager.setEXRender(MoonLightN, IHW_MoonLight.instance);
-			MMM_ItemRenderManager.setEXRender(MoonLightB, IHW_MoonLight.instance);
+			if (MMM_Helper.isClient) {
+				// ƒŒƒ“ƒ_ƒ‰‚Ì“o˜^
+				MMM_ItemRenderManager.setEXRender(MoonLightN, IHW_MoonLight.instance);
+				MMM_ItemRenderManager.setEXRender(MoonLightB, IHW_MoonLight.instance);
+			}
 		}
 		
 		// ƒJƒXƒ^ƒ€ƒpƒPƒbƒg‚Ì’Ç‰Á
@@ -104,7 +109,7 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 		Entity lentity = ((IHW_EntityLightWave)var1).getThrower();
 		return new IHW_PacketLightWaveSpawn(var1, 0, lentity == null ? 0 : lentity.entityId);
 	}
-
+/*
 	@Override
 	public Entity spawnEntity(int var1, World var2, double var3, double var5, double var7) {
 		// Forge
@@ -112,7 +117,7 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 		lentity.entityId = var1;
 		return lentity;
 	}
-
+*/
 	@Override
 	public void serverCustomPayload(NetServerHandler var1, Packet250CustomPayload var2) {
 		ItemStack litemstack = var1.playerEntity.getCurrentEquippedItem();
