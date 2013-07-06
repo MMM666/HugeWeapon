@@ -1,9 +1,9 @@
 package net.minecraft.src;
 
-import net.minecraft.client.Minecraft;
 
 public class IHW_ScytheAxe implements MMM_IItemRenderManager {
 
+	public static final ResourceLocation fmodelTex = new ResourceLocation("textures/models/hugeweapon/ScytheAxe.png");
 	public static IHW_ScytheAxe instance = new IHW_ScytheAxe();
 	public static final IHW_ModelBase fModel;
 
@@ -68,7 +68,7 @@ public class IHW_ScytheAxe implements MMM_IItemRenderManager {
 
 	// 独自のアイテムレンダラ
 	@Override
-	public boolean renderItem(EntityLiving pEntity, ItemStack pItemstack, int pIndex) {
+	public boolean renderItem(EntityLivingBase pEntity, ItemStack pItemstack, int pIndex) {
 		fModel.setRotationAngles(pItemstack, pEntity, MMM_Helper.mc.gameSettings.thirdPersonView);
 		fModel.renderItem(pItemstack, pEntity, MMM_Helper.mc.gameSettings.thirdPersonView);
 		return true;
@@ -84,10 +84,10 @@ public class IHW_ScytheAxe implements MMM_IItemRenderManager {
 		return false;
 	}
 
-	public String getRenderTexture() {
-		return "/item/ScytheAxe.png";
+	@Override
+	public ResourceLocation getRenderTexture() {
+		return fmodelTex;
 	}
-
 
 	public static boolean hitEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving, EntityLiving par3EntityLiving) {
 		par1ItemStack.damageItem(1, par3EntityLiving);

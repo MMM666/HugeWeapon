@@ -4,7 +4,7 @@ import java.util.List;
 
 public class IHW_ItemMoonLight extends ItemSword {
 
-	protected int weaponDamage;
+	protected float weaponDamage;
 	public static boolean isTrigger;
 
 

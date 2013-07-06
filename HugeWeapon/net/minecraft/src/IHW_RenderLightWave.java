@@ -5,9 +5,12 @@ import org.lwjgl.opengl.GL12;
 
 public class IHW_RenderLightWave extends Render {
 
+	public static final ResourceLocation fmodelTex = new ResourceLocation("textures/models/hugeweapon/LightWave.png");
+
+
 	public void renderLightWave(IHW_EntityLightWave pEntity,
 			double pX, double pY, double pZ, float var8, float var9) {
-		loadTexture("/item/LightWave.png");
+		func_110776_a(this.func_110775_a(pEntity));
 		GL11.glPushMatrix();
 		MMM_Helper.mc.entityRenderer.disableLightmap(0D);
 		
@@ -67,6 +70,11 @@ public class IHW_RenderLightWave extends Render {
 	@Override
 	public void doRender(Entity var1, double var2, double var4, double var6, float var8, float var9) {
 		renderLightWave((IHW_EntityLightWave)var1, var2, var4, var6, var8, var9);
+	}
+
+	@Override
+	protected ResourceLocation func_110775_a(Entity var1) {
+		return fmodelTex;
 	}
 
 }

@@ -2,8 +2,6 @@ package net.minecraft.src;
 
 import java.util.Map;
 
-import net.minecraft.client.Minecraft;
-
 
 public class mod_IHW_HugeWeapon extends BaseMod {
 
@@ -157,9 +155,9 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 		}
 	}
 
-	public static IHW_EntityLightWave getEntity(World par1World, EntityLiving par2EntityLiving) {
+	public static IHW_EntityLightWave getEntity(World par1World, EntityLivingBase par2EntityLiving) {
 		try {
-			return (IHW_EntityLightWave)classLightWave.getConstructor(World.class, EntityLiving.class).newInstance(par1World, par2EntityLiving);
+			return (IHW_EntityLightWave)classLightWave.getConstructor(World.class, EntityLivingBase.class).newInstance(par1World, par2EntityLiving);
 		} catch (Exception e) {
 //		} catch (Error e) {
 		}

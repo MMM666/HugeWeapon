@@ -1,9 +1,6 @@
 package net.minecraft.src;
 
-import net.minecraft.client.Minecraft;
-
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 public class IHW_ModelScytheAxe extends IHW_ModelBase {
 
@@ -68,7 +65,7 @@ public class IHW_ModelScytheAxe extends IHW_ModelBase {
 	}
 
 	@Override
-	public void setRotationAngles(ItemStack pitem, EntityLiving pentity, int pThirdPersonView) {
+	public void setRotationAngles(ItemStack pitem, EntityLivingBase pentity, int pThirdPersonView) {
 		// Œ`ó
 		int lc = IHW_ScytheAxe.getCount(pitem);
 		if (lc > 0) {
@@ -132,12 +129,13 @@ public class IHW_ModelScytheAxe extends IHW_ModelBase {
 		}
 	}
 
-	public void renderItem(ItemStack pitem, EntityLiving pentity, int pThirdPersonView) {
+	@Override
+	public void renderItem(ItemStack pitem, EntityLivingBase pentity, int pThirdPersonView) {
 		fGrip.render(1.0F);
 	}
 
 	@Override
-	public void renderSpecial(ItemStack pitem, EntityLiving pentity, int pThirdPersonView) {
+	public void renderSpecial(ItemStack pitem, EntityLivingBase pentity, int pThirdPersonView) {
 	}
 
 }

@@ -180,7 +180,7 @@ public class IHW_ModelMoonLight extends IHW_ModelBase {
 	}
 
 	@Override
-	public void setRotationAngles(ItemStack pitem, EntityLiving pentity, int pThirdPersonView) {
+	public void setRotationAngles(ItemStack pitem, EntityLivingBase pentity, int pThirdPersonView) {
 		float lscale = 0.10F;
 		EnumAction laction = getAction(pentity);
 		if (pThirdPersonView == 0 && MMM_Helper.mc.thePlayer == pentity) {
@@ -207,12 +207,13 @@ public class IHW_ModelMoonLight extends IHW_ModelBase {
 		}
 	}
 
-	public void renderItem(ItemStack pitem, EntityLiving pentity, int pThirdPersonView) {
+	@Override
+	public void renderItem(ItemStack pitem, EntityLivingBase pentity, int pThirdPersonView) {
 		fGrip.render(1.0F);
 	}
 
 	@Override
-	public void renderSpecial(ItemStack pitem, EntityLiving pentity, int pThirdPersonView) {
+	public void renderSpecial(ItemStack pitem, EntityLivingBase pentity, int pThirdPersonView) {
 		if (IHW_MoonLight.isENMode(pitem)) {
 			GL11.glPushMatrix();
 			

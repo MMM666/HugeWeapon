@@ -1,6 +1,5 @@
 package net.minecraft.src;
 
-import net.minecraft.client.Minecraft;
 
 public class IHW_PacketLightWaveSpawn extends Packet23VehicleSpawn {
 
@@ -18,7 +17,7 @@ public class IHW_PacketLightWaveSpawn extends Packet23VehicleSpawn {
 			double lz = (double)this.zPosition / 32.0D;
 			
 			Entity le = (mc.thePlayer.entityId == throwerEntityId) ? mc.thePlayer : lworld.getEntityByID(throwerEntityId);
-			if (le instanceof EntityLiving) {
+			if (le instanceof EntityLivingBase) {
 				IHW_EntityLightWave lentity = new IHW_EntityLightWave(lworld, lx, ly, lz);
 				lentity.serverPosX = this.xPosition;
 				lentity.serverPosY = this.yPosition;
