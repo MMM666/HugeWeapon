@@ -1,19 +1,20 @@
 package net.minecraft.src;
 
 
-import java.util.Iterator;
 import java.util.List;
 
-import org.lwjgl.opengl.GL11;
-
-import net.minecraft.client.Minecraft;
+import com.google.common.collect.Multimap;
 
 public class IHW_ItemScytheAxeS extends ItemShears implements IHW_IItemScytheAxe {
+
+	protected float weaponDamage;
+
 
 	protected IHW_ItemScytheAxeS(int par1) {
 		super(par1);
 		setCreativeTab(null);
 		IHW_ScytheAxe.setMaxDamage(this);
+		weaponDamage = 5;
 	}
 
 	@Override
@@ -27,13 +28,8 @@ public class IHW_ItemScytheAxeS extends ItemShears implements IHW_IItemScytheAxe
 	}
 
 	@Override
-	public int getDamageVsEntity(Entity par1Entity) {
-		return 6;
-	}
-
-	@Override
 	public boolean hitEntity(ItemStack par1ItemStack,
-			EntityLiving par2EntityLiving, EntityLiving par3EntityLiving) {
+			EntityLivingBase par2EntityLiving, EntityLivingBase par3EntityLiving) {
 		// 攻撃時の減り具合
 		
 		return IHW_ScytheAxe.hitEntity(par1ItemStack, par2EntityLiving, par3EntityLiving);
@@ -70,7 +66,7 @@ public class IHW_ItemScytheAxeS extends ItemShears implements IHW_IItemScytheAxe
 				if (lep.getHeldItem() == par1ItemStack) {
 					// 腕の振り始めを検出して判定開始
 					if (lep.isSwingInProgress) {
-						if (lep.swingProgressInt == -1) {
+						if (lep.field_110158_av == -1) {
 							fcanattack = true;
 						}
 					}
@@ -92,7 +88,7 @@ public class IHW_ItemScytheAxeS extends ItemShears implements IHW_IItemScytheAxe
 					if (lep.getHeldItem() == par1ItemStack) {
 						// 腕の振り始めを検出して判定開始
 						if (lep.isSwingInProgress) {
-							if (lep.swingProgressInt == -1) {
+							if (lep.field_110158_av == -1) {
 								fcanattack = true;
 							}
 						}
@@ -105,11 +101,11 @@ public class IHW_ItemScytheAxeS extends ItemShears implements IHW_IItemScytheAxe
 		
 		if (fcanattack) {
 			// 自身の周囲のMOBを獲得
-			List llist = par2World.getEntitiesWithinAABB(EntityLiving.class, par3Entity.boundingBox.expand(5D, 0D, 5D));
+			List llist = par2World.getEntitiesWithinAABB(EntityLivingBase.class, par3Entity.boundingBox.expand(5D, 0D, 5D));
 //			System.out.println(String.format("AttackAround: %d", llist.size()));
 			for (int lj = 0; lj < llist.size(); lj++) {
 				// 自分と通常の処理対象は除外
-				EntityLiving lel = (EntityLiving)llist.get(lj);
+				EntityLivingBase lel = (EntityLivingBase)llist.get(lj);
 				if (lel == par3Entity || lel == lentity || lel == lep) continue;
 				// 射程距離の判定、MOBの大きさを考慮
 				double lln = 3.0D + (double)lel.width;
@@ -136,7 +132,7 @@ public class IHW_ItemScytheAxeS extends ItemShears implements IHW_IItemScytheAxe
 						if (lep != null) {
 							lep.attackTargetEntityWithCurrentItem(lel);
 						} else {
-							par3Entity.attackEntityFrom(DamageSource.causeMobDamage((EntityLiving)par3Entity), getDamageVsEntity(lel));
+							((EntityLivingBase)par3Entity).attackEntityAsMob(lel);
 						}
 					}
 				}
@@ -177,6 +173,12 @@ public class IHW_ItemScytheAxeS extends ItemShears implements IHW_IItemScytheAxe
 	@Override
 	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack) {
 		return IHW_ScytheAxe.getIsRepairable(par1ItemStack, par1ItemStack) || super.getIsRepairable(par1ItemStack, par2ItemStack);
+	}
+
+	public Multimap func_111205_h() {
+		Multimap var1 = super.func_111205_h();
+		var1.put(SharedMonsterAttributes.field_111264_e.func_111108_a(), new AttributeModifier(field_111210_e, "Tool modifier", (double)weaponDamage, 0));
+		return var1;
 	}
 
 }

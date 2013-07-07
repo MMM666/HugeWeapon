@@ -12,18 +12,19 @@ public class IHW_ItemMoonLight extends ItemSword {
 	public IHW_ItemMoonLight(int pItemID, boolean pFlag) {
 		super(pItemID, EnumToolMaterial.IRON);
 		setMaxDamage(420);
-		if (pFlag) {
-			weaponDamage = super.getDamageVsEntity(null) * 2;
-			setCreativeTab(null);
-		} else {
-			weaponDamage = super.getDamageVsEntity(null);
+		try {
+			// めんどくさいのでダメージ値を書き込む
+			weaponDamage = (Float)ModLoader.getPrivateValue(ItemSword.class, this, 0);
+			if (pFlag) {
+				weaponDamage *= 2F;
+				setCreativeTab(null);
+			} else {
+			}
+			ModLoader.setPrivateValue(ItemSword.class, this, 0, weaponDamage);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		isTrigger = false;
-	}
-
-	@Override
-	public int getDamageVsEntity(Entity par1Entity) {
-		return weaponDamage;
 	}
 
 	@Override

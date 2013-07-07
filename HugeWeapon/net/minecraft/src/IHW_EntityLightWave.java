@@ -15,7 +15,7 @@ public class IHW_EntityLightWave extends EntityThrowable {
 		super(par1World);
 	}
 
-	public IHW_EntityLightWave(World par1World, EntityLiving par2EntityLiving) {
+	public IHW_EntityLightWave(World par1World, EntityLivingBase par2EntityLiving) {
 		super(par1World, par2EntityLiving);
 	}
 

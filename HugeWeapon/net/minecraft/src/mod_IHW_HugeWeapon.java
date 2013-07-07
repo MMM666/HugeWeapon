@@ -40,18 +40,18 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.5.2-2";
+		return "1.6.1-1";
 	}
 
 	@Override
 	public void load() {
 		// MMMLibのRevisionチェック
-		MMM_Helper.checkRevision("2");
+		MMM_Helper.checkRevision("1");
 		
 		// 攻撃方法と威力を分けるためにアイテムを２つ用意している。
 		if (ScytheAxeID > -1) {
-			ScytheAxeA = new IHW_ItemScytheAxeA(ScytheAxeID - 256).setUnlocalizedName("ScytheAxe");
-			ScytheAxeS = new IHW_ItemScytheAxeS(ScytheAxeID - 256 + 1).setUnlocalizedName("ScytheAxe");
+			ScytheAxeA = new IHW_ItemScytheAxeA(ScytheAxeID - 256).setUnlocalizedName("ScytheAxe").func_111206_d("ScytheAxe");
+			ScytheAxeS = new IHW_ItemScytheAxeS(ScytheAxeID - 256 + 1).setUnlocalizedName("ScytheAxe").func_111206_d("ScytheAxe");
 			ModLoader.addName(ScytheAxeA, "ScytheAxe");
 			ModLoader.addRecipe(new ItemStack(ScytheAxeA),
 					" I ",
@@ -68,8 +68,8 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 			}
 		}
 		if (MoonLightID > -1) {
-			MoonLightN = new IHW_ItemMoonLight(MoonLightID - 256, false).setUnlocalizedName("MoonLight");
-			MoonLightB = new IHW_ItemMoonLight(MoonLightID - 256 + 1, true).setUnlocalizedName("MoonLight");
+			MoonLightN = new IHW_ItemMoonLight(MoonLightID - 256, false).setUnlocalizedName("MoonLight").func_111206_d("MoonLight");
+			MoonLightB = new IHW_ItemMoonLight(MoonLightID - 256 + 1, true).setUnlocalizedName("MoonLight").func_111206_d("MoonLight");
 			ModLoader.addName(MoonLightN, "MOONLIGHT");
 			ModLoader.addRecipe(new ItemStack(MoonLightN),
 					"  I",

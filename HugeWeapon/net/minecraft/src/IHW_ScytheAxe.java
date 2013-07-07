@@ -52,7 +52,7 @@ public class IHW_ScytheAxe implements MMM_IItemRenderManager {
 		// クリック動作封印用
 		try {
 			// leftClickCounter
-			ModLoader.setPrivateValue(Minecraft.class, MMM_Helper.mc, 30, Integer.valueOf(pvalue));
+			ModLoader.setPrivateValue(Minecraft.class, MMM_Helper.mc, 29, Integer.valueOf(pvalue));
 		} catch (Exception e) {
 			
 		}
@@ -89,7 +89,8 @@ public class IHW_ScytheAxe implements MMM_IItemRenderManager {
 		return fmodelTex;
 	}
 
-	public static boolean hitEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving, EntityLiving par3EntityLiving) {
+	public static boolean hitEntity(ItemStack par1ItemStack,
+			EntityLivingBase par2EntityLiving, EntityLivingBase par3EntityLiving) {
 		par1ItemStack.damageItem(1, par3EntityLiving);
 		return true;
 	}

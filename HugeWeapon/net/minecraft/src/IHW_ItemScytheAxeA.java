@@ -1,12 +1,7 @@
 package net.minecraft.src;
 
 
-import java.util.Iterator;
 import java.util.List;
-
-import org.lwjgl.opengl.GL11;
-
-import net.minecraft.client.Minecraft;
 
 public class IHW_ItemScytheAxeA extends ItemAxe implements IHW_IItemScytheAxe {
 
@@ -14,6 +9,11 @@ public class IHW_ItemScytheAxeA extends ItemAxe implements IHW_IItemScytheAxe {
 		super(par1, EnumToolMaterial.IRON);
 		setCreativeTab(CreativeTabs.tabCombat);
 		IHW_ScytheAxe.setMaxDamage(this);
+		try {
+			ModLoader.setPrivateValue(ItemTool.class, this, 2, (float)9F);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -27,13 +27,8 @@ public class IHW_ItemScytheAxeA extends ItemAxe implements IHW_IItemScytheAxe {
 	}
 
 	@Override
-	public int getDamageVsEntity(Entity par1Entity) {
-		return 10;
-	}
-
-	@Override
 	public boolean hitEntity(ItemStack par1ItemStack,
-			EntityLiving par2EntityLiving, EntityLiving par3EntityLiving) {
+			EntityLivingBase par2EntityLiving, EntityLivingBase par3EntityLiving) {
 		// ÉGÉìÉ`ÉÉÉìÉgÇ…ÇÊÇÈì¡éÍìÆçÏ
 		if (!par3EntityLiving.worldObj.isRemote) {
 			if (EnchantmentHelper.getSilkTouchModifier(par3EntityLiving)) {
