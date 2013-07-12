@@ -8,7 +8,7 @@ public class IHW_EntityLightWave_Forge extends IHW_EntityLightWave implements IT
 		super(par1World);
 	}
 
-	public IHW_EntityLightWave_Forge(World par1World, EntityLiving par2EntityLiving) {
+	public IHW_EntityLightWave_Forge(World par1World, EntityLivingBase par2EntityLiving) {
 		super(par1World, par2EntityLiving);
 	}
 

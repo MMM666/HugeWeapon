@@ -1,4 +1,4 @@
-大型武器追加MOD HugeWeapon 1.5.2 Rev2
+大型武器追加MOD HugeWeapon 1.6.2 Rev1
 
 でっかい武器を追加します。
 
@@ -12,7 +12,7 @@
 使い方
 	・要Modloader。
 	・要MMMLib。
-	・%appdata%/.mincraft/modsにZIPのまま放りこめば動くはずです。
+	・%appdata%/.mincraft/versions/1.6.2ML/modsにZIPのまま放りこめば動くはずです。
 	・%appdata%/.mincraft/config/mod_IHW_HugeWeapon.cfgができるので設定はそちらで。
 
 
@@ -52,14 +52,14 @@
 	・バランス的には対MOD追加MOB用なので通常MOBに対しては過剰です。
 
 変更点
+	20130522.1	1.6.2 Rev1 バージョンアップ
+
+
+
 	20130522.1	1.5.2 Rev1 更新
 				サーバー側でエラーを出していた部分を修正。
 				モデル系の改修に掛かる更新。
 				ItemRenderer関係の改修対応
-
-
-
-
 	20130507.1	1.5.2 Rev1 バージョンアップ
 	20130502.1	1.5.1 Rev2 更新
 				MOONLIGHTの追加。

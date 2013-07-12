@@ -40,7 +40,7 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.6.1-1";
+		return "1.6.2-1";
 	}
 
 	@Override
@@ -107,15 +107,7 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 		Entity lentity = ((IHW_EntityLightWave)var1).getThrower();
 		return new IHW_PacketLightWaveSpawn(var1, 0, lentity == null ? 0 : lentity.entityId);
 	}
-/*
-	@Override
-	public Entity spawnEntity(int var1, World var2, double var3, double var5, double var7) {
-		// Forge
-		IHW_EntityLightWave lentity = getEntity(var2, var3, var5, var7);
-		lentity.entityId = var1;
-		return lentity;
-	}
-*/
+
 	@Override
 	public void serverCustomPayload(NetServerHandler var1, Packet250CustomPayload var2) {
 		ItemStack litemstack = var1.playerEntity.getCurrentEquippedItem();
@@ -159,6 +151,7 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 		try {
 			return (IHW_EntityLightWave)classLightWave.getConstructor(World.class, EntityLivingBase.class).newInstance(par1World, par2EntityLiving);
 		} catch (Exception e) {
+			e.printStackTrace();
 //		} catch (Error e) {
 		}
 		return null;
@@ -168,6 +161,7 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 		try {
 			return (IHW_EntityLightWave)classLightWave.getConstructor(World.class, double.class, double.class, double.class).newInstance(par1World, par2, par4, par6);
 		} catch (Exception e) {
+			e.printStackTrace();
 //		} catch (Error e) {
 		}
 		return null;
