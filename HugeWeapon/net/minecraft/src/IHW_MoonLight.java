@@ -29,7 +29,7 @@ public class IHW_MoonLight implements MMM_IItemRenderManager {
 	}
 
 	@Override
-	public boolean renderItem(EntityLivingBase pEntity, ItemStack pItemstack, int pIndex) {
+	public boolean renderItem(Entity pEntity, ItemStack pItemstack, int pIndex) {
 		// 独自のアイテムレンダラ
 		fModel.setRotationAngles(pItemstack, pEntity, MMM_Helper.mc.gameSettings.thirdPersonView);
 		if (pIndex == 0) {
@@ -41,8 +41,8 @@ public class IHW_MoonLight implements MMM_IItemRenderManager {
 	}
 
 	@Override
-	public boolean renderItemInFirstPerson(float pDeltaTimepRenderPhatialTick,
-			MMM_ItemRenderer pItemRenderer) {
+	public boolean renderItemInFirstPerson(Entity pEntity,
+			ItemStack pItemStack, float pDeltaTimepRenderPhatialTick) {
 		return false;
 	}
 
@@ -54,6 +54,24 @@ public class IHW_MoonLight implements MMM_IItemRenderManager {
 	@Override
 	public ResourceLocation getRenderTexture() {
 		return fmodelTex;
+	}
+
+	@Override
+	public boolean renderItemWorld() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isRenderItem() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isRenderItemInFirstPerson() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 }

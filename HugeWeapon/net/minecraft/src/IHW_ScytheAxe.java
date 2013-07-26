@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import org.lwjgl.opengl.GL11;
+
 
 public class IHW_ScytheAxe implements MMM_IItemRenderManager {
 
@@ -68,16 +70,32 @@ public class IHW_ScytheAxe implements MMM_IItemRenderManager {
 
 	// 独自のアイテムレンダラ
 	@Override
-	public boolean renderItem(EntityLivingBase pEntity, ItemStack pItemstack, int pIndex) {
-		fModel.setRotationAngles(pItemstack, pEntity, MMM_Helper.mc.gameSettings.thirdPersonView);
-		fModel.renderItem(pItemstack, pEntity, MMM_Helper.mc.gameSettings.thirdPersonView);
+	public boolean renderItem(Entity pEntity, ItemStack pItemstack, int pIndex) {
+		int lviewmode = MMM_Helper.mc.thePlayer == pEntity ? MMM_Helper.mc.gameSettings.thirdPersonView : VM_THERD_PERSON;
+		if (lviewmode == VM_FIRST_PERSON) {
+			// FirstPerson
+			GL11.glScalef(0.14F, 0.14F, 0.14F);
+			GL11.glTranslatef(-1.0F, -1.0F, 0.0F);
+			GL11.glRotatef(140.0F, 0.0F, 1.0F, 0.0F);
+			GL11.glRotatef(-20.0F, 1.0F, 0.0F, 0.0F);
+		} else {
+			// TherdPerson
+			GL11.glScalef(0.14F, 0.14F, 0.14F);
+			GL11.glTranslatef(-1.0F, 0.0F, 0.0F);
+			GL11.glRotatef(140.0F, 0.0F, 1.0F, 0.0F);
+			GL11.glRotatef(-20.0F, 1.0F, 0.0F, 0.0F);
+		}
+		fModel.setRotationAngles(pItemstack, pEntity, lviewmode);
+		fModel.renderItem(pItemstack, pEntity, lviewmode);
 		return true;
 	}
 
 	@Override
-	public boolean renderItemInFirstPerson(float pDelta, MMM_ItemRenderer pItemRenderer) {
+	public boolean renderItemInFirstPerson(Entity pEntity,
+			ItemStack pItemStack, float pDeltaTimepRenderPhatialTick) {
 		return false;
 	}
+
 
 	@Override
 	public boolean isRenderItemWorld() {
@@ -153,6 +171,24 @@ public class IHW_ScytheAxe implements MMM_IItemRenderManager {
 				}
 			}
 		}
+	}
+
+	@Override
+	public boolean renderItemWorld() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isRenderItem() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isRenderItemInFirstPerson() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

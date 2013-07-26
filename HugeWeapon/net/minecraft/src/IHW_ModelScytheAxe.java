@@ -65,7 +65,7 @@ public class IHW_ModelScytheAxe extends IHW_ModelBase {
 	}
 
 	@Override
-	public void setRotationAngles(ItemStack pitem, EntityLivingBase pentity, int pThirdPersonView) {
+	public void setRotationAngles(ItemStack pitem, Entity pentity, int pThirdPersonView) {
 		// Œ`ó
 		int lc = IHW_ScytheAxe.getCount(pitem);
 		if (lc > 0) {
@@ -113,29 +113,15 @@ public class IHW_ModelScytheAxe extends IHW_ModelBase {
 				fBase.rotationPointY = 0F;
 			}
 		}
-		
-		if (pThirdPersonView == 0 && MMM_Helper.mc.thePlayer == pentity) {
-			// FirstPerson
-			GL11.glScalef(0.14F, 0.14F, 0.14F);
-			GL11.glTranslatef(-1.0F, -1.0F, 0.0F);
-			GL11.glRotatef(140.0F, 0.0F, 1.0F, 0.0F);
-			GL11.glRotatef(-20.0F, 1.0F, 0.0F, 0.0F);
-		} else {
-			// TherdPerson
-			GL11.glScalef(0.14F, 0.14F, 0.14F);
-			GL11.glTranslatef(-1.0F, 0.0F, 0.0F);
-			GL11.glRotatef(140.0F, 0.0F, 1.0F, 0.0F);
-			GL11.glRotatef(-20.0F, 1.0F, 0.0F, 0.0F);
-		}
 	}
 
 	@Override
-	public void renderItem(ItemStack pitem, EntityLivingBase pentity, int pThirdPersonView) {
+	public void renderItem(ItemStack pitem, Entity pentity, int pThirdPersonView) {
 		fGrip.render(1.0F);
 	}
 
 	@Override
-	public void renderSpecial(ItemStack pitem, EntityLivingBase pentity, int pThirdPersonView) {
+	public void renderSpecial(ItemStack pitem, Entity pentity, int pThirdPersonView) {
 	}
 
 }

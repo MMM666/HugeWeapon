@@ -13,7 +13,7 @@ public class IHW_ItemMoonLight extends ItemSword {
 		super(pItemID, EnumToolMaterial.IRON);
 		setMaxDamage(420);
 		try {
-			// めんどくさいのでダメージ値を書き込む
+			// めんどくさいので攻撃力を書き込む
 			weaponDamage = (Float)ModLoader.getPrivateValue(ItemSword.class, this, 0);
 			if (pFlag) {
 				weaponDamage *= 2F;
