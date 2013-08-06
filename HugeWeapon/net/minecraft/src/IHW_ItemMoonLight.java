@@ -50,7 +50,7 @@ public class IHW_ItemMoonLight extends ItemSword {
 			if (par3Entity instanceof EntityPlayerSP) {
 				EntityPlayerSP lplayer = (EntityPlayerSP)par3Entity;
 				// Œõ”g
-				if (lflag && mod_IHW_HugeWeapon.isLightWave) {
+				if (lflag && mod_IHW_HugeWeapon.cfg_isLightWave) {
 					int lcount = lplayer.sprintingTicksLeft;
 //					if (lcount > 594 && lplayer.swingProgressInt == -1) {
 					// o‚µ•û‚ÍAC‚Æ“¯‚¶

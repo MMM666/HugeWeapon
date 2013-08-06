@@ -182,13 +182,13 @@ public class IHW_ScytheAxe implements MMM_IItemRenderManager {
 	@Override
 	public boolean isRenderItem() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isRenderItemInFirstPerson() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 }

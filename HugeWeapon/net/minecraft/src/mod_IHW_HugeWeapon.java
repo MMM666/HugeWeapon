@@ -5,14 +5,21 @@ import java.util.Map;
 
 public class mod_IHW_HugeWeapon extends BaseMod {
 
-	@MLProp(info="ItemID +0..+1 (shiftedindex = -256. -1 is Items Disable.)", min=4096, max=32000)
-	public static int ScytheAxeID = 22270;
-	@MLProp(info="ItemID +0..+1 (shiftedindex = -256. -1 is Items Disable.)", min=4096, max=32000)
-	public static int MoonLightID = 22272;
-	@MLProp(info="Enable LightWave")
-	public static boolean isLightWave = true;
-	@MLProp
-	public static boolean isDebugMessage = true;
+	public static String[] cfg_comment = {
+		"ScytheAxeID = ItemID +0..+1 (shiftedindex = -256. -1 is Items Disable. min=4096, max=32000)",
+		"MoonLightID = ItemID +0..+1 (shiftedindex = -256. -1 is Items Disable. min=4096, max=32000)",
+		"isLightWave = Enable LightWave",
+		"isDebugMessage = Print Debug Massages."
+	};
+
+//	@MLProp(info="ItemID +0..+1 (shiftedindex = -256. -1 is Items Disable.)", min=4096, max=32000)
+	public static int cfg_ScytheAxeID = 22270;
+//	@MLProp(info="ItemID +0..+1 (shiftedindex = -256. -1 is Items Disable.)", min=4096, max=32000)
+	public static int cfg_MoonLightID = 22272;
+//	@MLProp(info="Enable LightWave")
+	public static boolean cfg_isLightWave = true;
+//	@MLProp
+	public static boolean cfg_isDebugMessage = true;
 	
 	public static Item ScytheAxeA;
 	public static Item ScytheAxeS;
@@ -23,7 +30,7 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 
 	public static void Debug(String pText, Object... pVals) {
 		// デバッグメッセージ
-		if (isDebugMessage) {
+		if (cfg_isDebugMessage) {
 			System.out.println(String.format("HugeWeapon-" + pText, pVals));
 		}
 	}
@@ -46,12 +53,13 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 	@Override
 	public void load() {
 		// MMMLibのRevisionチェック
-		MMM_Helper.checkRevision("3");
+		MMM_Helper.checkRevision("4");
+		MMM_Config.checkConfig(this.getClass());
 		
 		// 攻撃方法と威力を分けるためにアイテムを２つ用意している。
-		if (ScytheAxeID > -1) {
-			ScytheAxeA = new IHW_ItemScytheAxeA(ScytheAxeID - 256).setUnlocalizedName("ScytheAxe").func_111206_d("ScytheAxe");
-			ScytheAxeS = new IHW_ItemScytheAxeS(ScytheAxeID - 256 + 1).setUnlocalizedName("ScytheAxe").func_111206_d("ScytheAxe");
+		if (cfg_ScytheAxeID > -1) {
+			ScytheAxeA = new IHW_ItemScytheAxeA(cfg_ScytheAxeID - 256).setUnlocalizedName("ScytheAxe").func_111206_d("ScytheAxe");
+			ScytheAxeS = new IHW_ItemScytheAxeS(cfg_ScytheAxeID - 256 + 1).setUnlocalizedName("ScytheAxe").func_111206_d("ScytheAxe");
 			ModLoader.addName(ScytheAxeA, "ScytheAxe");
 			ModLoader.addRecipe(new ItemStack(ScytheAxeA),
 					" I ",
@@ -67,9 +75,9 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 				MMM_ItemRenderManager.setEXRender(ScytheAxeS, IHW_ScytheAxe.instance);
 			}
 		}
-		if (MoonLightID > -1) {
-			MoonLightN = new IHW_ItemMoonLight(MoonLightID - 256, false).setUnlocalizedName("MoonLight").func_111206_d("MoonLight");
-			MoonLightB = new IHW_ItemMoonLight(MoonLightID - 256 + 1, true).setUnlocalizedName("MoonLight").func_111206_d("MoonLight");
+		if (cfg_MoonLightID > -1) {
+			MoonLightN = new IHW_ItemMoonLight(cfg_MoonLightID - 256, false).setUnlocalizedName("MoonLight").func_111206_d("MoonLight");
+			MoonLightB = new IHW_ItemMoonLight(cfg_MoonLightID - 256 + 1, true).setUnlocalizedName("MoonLight").func_111206_d("MoonLight");
 			ModLoader.addName(MoonLightN, "MOONLIGHT");
 			ModLoader.addRecipe(new ItemStack(MoonLightN),
 					"  I",
@@ -80,7 +88,7 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 					);
 //			int leid = MMM_Helper.getNextEntityID(false);
 			classLightWave = MMM_Helper.getForgeClass(this, "IHW_EntityLightWave");
-			if (isLightWave) {
+			if (cfg_isLightWave) {
 				MMM_Helper.registerEntity(classLightWave, "LightWave", 0, this, 64, 10, false);
 //				ModLoader.registerEntityID(classLightWave, "LightWave", leid);
 //				ModLoader.addEntityTracker(this, classLightWave, leid, 64, 10, false);
@@ -127,7 +135,7 @@ public class mod_IHW_HugeWeapon extends BaseMod {
 		}
 		if (var2.data[0] == 0x02 && litemstack.getItem() instanceof IHW_ItemMoonLight) {
 			// 光波
-			if (isLightWave) {
+			if (cfg_isLightWave) {
 				World lworld = var1.playerEntity.worldObj;
 				IHW_EntityLightWave lentity = getEntity(lworld, var1.playerEntity);
 				lworld.spawnEntityInWorld(lentity);
