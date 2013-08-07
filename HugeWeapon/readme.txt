@@ -11,7 +11,7 @@
 
 使い方
 	・要Modloader。
-	・要MMMLib。
+	・要MMMLib Rev4。
 	・%appdata%/.mincraft/versions/1.6.2ML/modsにZIPのまま放りこめば動くはずです。
 	・%appdata%/.mincraft/config/mod_IHW_HugeWeapon.cfgができるので設定はそちらで。
 
@@ -52,7 +52,9 @@
 	・バランス的には対MOD追加MOB用なので通常MOBに対しては過剰です。
 
 変更点
-	20130522.1	1.6.2 Rev1 バージョンアップ
+	20130807.1	1.6.2 Rev1 バージョンアップ
+				Forge対策。
+				cfgを独自仕様へ。
 
 
 

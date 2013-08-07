@@ -54,7 +54,7 @@ public class IHW_ScytheAxe implements MMM_IItemRenderManager {
 		// クリック動作封印用
 		try {
 			// leftClickCounter
-			ModLoader.setPrivateValue(Minecraft.class, MMM_Helper.mc, 29, Integer.valueOf(pvalue));
+			ModLoader.setPrivateValue(Minecraft.class, MMM_Helper.mc, 30, Integer.valueOf(pvalue));
 		} catch (Exception e) {
 			
 		}
@@ -98,12 +98,7 @@ public class IHW_ScytheAxe implements MMM_IItemRenderManager {
 
 
 	@Override
-	public boolean isRenderItemWorld() {
-		return false;
-	}
-
-	@Override
-	public ResourceLocation getRenderTexture() {
+	public ResourceLocation getRenderTexture(ItemStack pItemStack) {
 		return fmodelTex;
 	}
 
@@ -174,19 +169,24 @@ public class IHW_ScytheAxe implements MMM_IItemRenderManager {
 	}
 
 	@Override
-	public boolean renderItemWorld() {
+	public boolean renderItemWorld(ItemStack pItemStack) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean isRenderItem() {
+	public boolean isRenderItemWorld(ItemStack pItemStack) {
+		return false;
+	}
+
+	@Override
+	public boolean isRenderItem(ItemStack pItemStack) {
 		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
-	public boolean isRenderItemInFirstPerson() {
+	public boolean isRenderItemInFirstPerson(ItemStack pItemStack) {
 		// TODO Auto-generated method stub
 		return true;
 	}

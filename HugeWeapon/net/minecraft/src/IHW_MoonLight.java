@@ -47,29 +47,29 @@ public class IHW_MoonLight implements MMM_IItemRenderManager {
 	}
 
 	@Override
-	public boolean isRenderItemWorld() {
+	public boolean isRenderItemWorld(ItemStack pItemStack) {
 		return false;
 	}
 
 	@Override
-	public ResourceLocation getRenderTexture() {
+	public ResourceLocation getRenderTexture(ItemStack pItemStack) {
 		return fmodelTex;
 	}
 
 	@Override
-	public boolean renderItemWorld() {
+	public boolean renderItemWorld(ItemStack pItemStack) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean isRenderItem() {
+	public boolean isRenderItem(ItemStack pItemStack) {
 		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
-	public boolean isRenderItemInFirstPerson() {
+	public boolean isRenderItemInFirstPerson(ItemStack pItemStack) {
 		// TODO Auto-generated method stub
 		return true;
 	}
